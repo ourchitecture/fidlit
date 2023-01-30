@@ -20,6 +20,11 @@
         "kind": "test",
         "isDefault": true
       }
+    },
+    {
+      "label": "dev",
+      "type": "shell",
+      "command": "make dev"
     }
   ]
 }
