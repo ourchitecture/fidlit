@@ -7,3 +7,4 @@
 - [O'Reilly Book Search](https://learning.oreilly.com/beta-search/?q=) 🔗 _\*Requires license._
 - [Amazon Advanced Book Search](https://www.amazon.com/advanced-search/books) 🔗
 - [Lighthouse web performance report](https://github.com/GoogleChrome/lighthouse#readme) 🔗
+- [Cypress Angular Schematic](https://www.npmjs.com/package/@cypress/schematic) 🔗

@@ -24,8 +24,12 @@ check-lint:
 check-unit:
 	@yarn test
 
+.PHONY: check-e2e
+check-e2e:
+	@yarn e2e
+
 .PHONY: check
-check: check-lint check-unit
+check: check-lint check-unit check-e2e
 
 .PHONY: install
 install:
