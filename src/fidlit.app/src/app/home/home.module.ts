@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { IonicModule } from '@ionic/angular';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTreeModule } from '@angular/material/tree';
 
 import { HomePage } from './home.page';
 
@@ -14,8 +17,11 @@ import { HomePageRoutingModule } from './home-routing.module';
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     IonicModule,
     MatButtonModule,
+    MatIconModule,
+    MatTreeModule,
     HomePageRoutingModule,
   ],
   declarations: [HomePage],

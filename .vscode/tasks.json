@@ -25,6 +25,11 @@
       "label": "dev",
       "type": "shell",
       "command": "make dev"
+    },
+    {
+      "label": "capability-models",
+      "type": "shell",
+      "command": "make capability-models"
     }
   ]
 }

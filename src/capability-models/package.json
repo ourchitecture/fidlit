@@ -1,0 +1,12 @@
+{
+  "name": "capability-models",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "devDependencies": {
+    "read-excel-file": "^5.5.3"
+  }
+}

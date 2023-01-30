@@ -62,3 +62,7 @@ update:
     @angular/compiler-cli@^15 \
     @angular/language-service@^15 \
     --create-commits
+
+.PHONY: root
+root:
+	@code -r ../../

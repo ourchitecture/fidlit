@@ -1,3 +1,4 @@
+capability_models_path=./src/capability-models/
 site_path=./src/fidlit.app/
 
 .DEFAULT_GOAL:=all
@@ -52,6 +53,14 @@ dev:
 .PHONY: ws
 ws:
 	@code -r $(site_path)fidlit-app.code-workspace
+
+.PHONY: capability-models
+capability-models:
+	@cd $(capability_models_path) \
+	&& "$(MAKE)" install
+	@cp \
+		$(capability_models_path)dist/airline-industry-capabilities.json \
+		$(site_path)src/api/examples/industries/airlines/capabilities.json
 
 .PHONY: sync
 sync:
