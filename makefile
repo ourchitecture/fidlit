@@ -49,6 +49,10 @@ dev:
 	@cd $(site_path) \
 	&& "$(MAKE)" $@
 
+.PHONY: ws
+ws:
+	@code -r $(site_path)fidlit-app.code-workspace
+
 .PHONY: sync
 sync:
 	@git-town sync
