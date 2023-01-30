@@ -8,6 +8,7 @@ name: continuous_integration
 # place "magic strings" used in the workflow here for convenient maintenance
 env:
   CI: true
+  NG_CLI_ANALYTICS: ci
   MAIN_BRANCH_REF: "refs/heads/main"
   PUSH_EVENT: "push"
   YARN_CACHE_NAME: "yarn"
