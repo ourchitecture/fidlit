@@ -49,6 +49,10 @@ update:
     @angular/router@^15 \
     @angular/service-worker@^15 \
     @angular-devkit/build-angular@^15 \
+    @angular-eslint/builder@^15 \
+    @angular-eslint/eslint-plugin@^15 \
+    @angular-eslint/eslint-plugin-template@^15 \
+    @angular-eslint/template-parser@^15 \
     @angular/cli@^15 \
     @angular/compiler@^15 \
     @angular/compiler-cli@^15 \
