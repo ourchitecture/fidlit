@@ -32,3 +32,20 @@ start:
 
 .PHONY: dev
 dev: start
+
+.PHONY: update
+update:
+	@yarn ng update \
+    @angular/common@^15 \
+    @angular/core@^15 \
+    @angular/forms@^15 \
+    @angular/platform-browser@^15 \
+    @angular/platform-browser-dynamic@^15 \
+    @angular/router@^15 \
+    @angular/service-worker@^15 \
+    @angular-devkit/build-angular@^15 \
+    @angular/cli@^15 \
+    @angular/compiler@^15 \
+    @angular/compiler-cli@^15 \
+    @angular/language-service@^15 \
+    --create-commits
