@@ -15,6 +15,10 @@ init:
 check:
 	@cd $(site_path) && "$(MAKE)" $@
 
+.PHONY: update
+update:
+	@cd $(site_path) && "$(MAKE)" $@
+
 .PHONY: install
 install:
 	@rm -rf ./docs/ \
