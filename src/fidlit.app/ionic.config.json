@@ -1,0 +1,7 @@
+{
+  "name": "fidlit",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,76 @@
+################################################################################
+# 1. Runs checks and install
+# 2. If a PR to main, creates a PR containing the "./docs" output
+# 3. Skips building that same PR again when pushed back to "main".
+################################################################################
+name: continuous_integration
+
+# place "magic strings" used in the workflow here for convenient maintenance
+env:
+  CI: true
+  MAIN_BRANCH_REF: "refs/heads/main"
+  PUSH_EVENT: "push"
+  YARN_CACHE_NAME: "yarn"
+  YARN_CACHE_PATH: "./**/yarn.lock"
+  OUR_AUTODOC_COMMIT: "docs: auto-generated documentation"
+  OUR_AUTODOC_DESC: "Automatically generated documentation that requires a PR, because the main branch is protected."
+  OUR_AUTODOC_LABELS: "documentation"
+  # this variable uses a system account since there are permission issues when assigning teams
+  # see: https://github.com/peter-evans/create-pull-request/issues/155#issuecomment-611904487
+  OUR_AUTODOC_REVIEWERS: "ourchitectureio"
+  OUR_AUTODOC_ASSIGNEES: "ourchitectureio"
+  OUR_SKIP_CI: "[skip ci]"
+  OUR_CREATE_PR: "ourchitecture/create-pull-request/patch"
+
+# Trigger the workflow on push or pull request.
+on: [push, pull_request]
+
+jobs:
+  integration:
+    # Do not run on forks.
+    # Do not re-run a push from "create-pull-request" action.
+    # NOTE: Cannot use `env`: https://github.com/actions/runner/issues/1189#issuecomment-880110759
+    if: |
+      github.repository == 'ourchitecture/fiddlit'
+      && !contains(github.event.head_commit.message, 'ourchitecture/create-pull-request/patch')
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it.
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          # See: https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+          cache: ${{ env.YARN_CACHE_NAME }}
+          cache-dependency-path: ${{ env.YARN_CACHE_PATH }}
+
+      - name: install
+        run: |
+          make all
+          sudo chown -R $(whoami) ./docs
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        # If push to main, avoid infinite loop.
+        if: |
+          github.event_name == env.PUSH_EVENT &&
+          github.ref == env.MAIN_BRANCH_REF &&
+          !contains(github.event.head_commit.message, env.OUR_CREATE_PR)
+        with:
+          title: ${{ env.OUR_AUTODOC_COMMIT }}
+          signoff: true
+          commit-message: "${{ env.OUR_AUTODOC_COMMIT }} ${{ env.OUR_SKIP_CI }}"
+          body: ${{ env.OUR_AUTODOC_DESC }}
+          labels: ${{ env.OUR_AUTODOC_LABELS }}
+          assignees: ${{ env.OUR_AUTODOC_ASSIGNEES }}
+          # a PAT was generated to support this field
+          # see: https://github.com/peter-evans/create-pull-request/issues/155
+          team-reviewers: ${{ env.OUR_AUTODOC_REVIEWERS }}
