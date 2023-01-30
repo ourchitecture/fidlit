@@ -5,6 +5,11 @@
 .PHONY: all
 all: init check install
 
+# updates "yarn.lock"
+.PHONY: reinit
+reinit:
+	@yarn install
+
 .PHONY: init
 init:
 	@yarn install \

@@ -7,17 +7,25 @@ site_path=./src/fidlit.app/
 .PHONY: all
 all: init check install
 
+.PHONY: reinit
+reinit:
+	@cd $(site_path) \
+	&& "$(MAKE)" $@
+
 .PHONY: init
 init:
-	@cd $(site_path) && "$(MAKE)" $@
+	@cd $(site_path) \
+	&& "$(MAKE)" $@
 
 .PHONY: check
 check:
-	@cd $(site_path) && "$(MAKE)" $@
+	@cd $(site_path) \
+	&& "$(MAKE)" $@
 
 .PHONY: update
 update:
-	@cd $(site_path) && "$(MAKE)" $@
+	@cd $(site_path) \
+	&& "$(MAKE)" $@
 
 .PHONY: install
 install:
@@ -28,15 +36,18 @@ install:
 
 .PHONY: search-index
 search-index:
-	@cd $(site_path) && "$(MAKE)" $@
+	@cd $(site_path) \
+	&& "$(MAKE)" $@
 
 .PHONY: start
 start:
-	@cd $(site_path) && "$(MAKE)" $@
+	@cd $(site_path) \
+	&& "$(MAKE)" $@
 
 .PHONY: dev
 dev:
-	@cd $(site_path) && "$(MAKE)" $@
+	@cd $(site_path) \
+	&& "$(MAKE)" $@
 
 .PHONY: sync
 sync:
