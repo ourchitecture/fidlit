@@ -13,16 +13,19 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 
+import { LogoComponent } from '../components/icons/logo/logo.component';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    HomePageRoutingModule,
     HttpClientModule,
     IonicModule,
+    LogoComponent,
     MatButtonModule,
     MatIconModule,
     MatTreeModule,
-    HomePageRoutingModule,
   ],
   declarations: [HomePage],
 })

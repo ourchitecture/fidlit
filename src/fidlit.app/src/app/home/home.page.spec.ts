@@ -1,13 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTreeModule } from '@angular/material/tree';
 
 import { IonicModule } from '@ionic/angular';
 
+import { Storage } from '@ionic/storage-angular';
+
 import { HomePage } from './home.page';
+
+import { LogoComponent } from '../components/icons/logo/logo.component';
+
+import { StorageService } from '../services/storage.service';
 
 describe('HomePage', () => {
   let component: HomePage;
@@ -17,12 +21,13 @@ describe('HomePage', () => {
     await TestBed.configureTestingModule({
       declarations: [HomePage],
       imports: [
+        CommonModule,
+        FormsModule,
         HttpClientTestingModule,
         IonicModule.forRoot(),
-        MatButtonModule,
-        MatIconModule,
-        MatTreeModule,
+        LogoComponent,
       ],
+      providers: [Storage, StorageService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomePage);

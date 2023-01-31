@@ -1,10 +1,3 @@
-ion-toolbar {
-  svg#logo-icon {
-    min-width: var(--logo-icon-size);
-    min-height: var(--logo-icon-size);
-    width: var(--logo-icon-size);
-    height: var(--logo-icon-size);
-    max-width: var(--logo-icon-size);
-    max-height: var(--logo-icon-size);
-  }
+#logo-icon {
+  --logo-icon-size: 24px;
 }

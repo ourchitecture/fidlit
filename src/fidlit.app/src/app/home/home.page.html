@@ -2,109 +2,7 @@
   <ion-toolbar>
     <ion-title>
       <a href="/">
-        <svg
-          id="logo-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          viewBox="0 0 479.32 559.21"
-        >
-          <defs>
-            <style>
-              .cls-1 {
-                fill: url(#New_Gradient_Swatch_copy_26);
-              }
-              .cls-2 {
-                fill: url(#New_Gradient_Swatch_copy_21);
-              }
-              .cls-3 {
-                fill: url(#New_Gradient_Swatch_copy_21-2);
-              }
-              .cls-4 {
-                fill: url(#New_Gradient_Swatch_copy_32);
-              }
-              .cls-5 {
-                fill: url(#New_Gradient_Swatch_copy_32-2);
-              }
-              .cls-6 {
-                fill: url(#New_Gradient_Swatch_copy_26-2);
-              }
-            </style>
-            <linearGradient
-              id="New_Gradient_Swatch_copy_21"
-              x1="-56.07"
-              y1="551.9"
-              x2="331.21"
-              y2="117.62"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop offset="0" stop-color="#2af295" />
-              <stop offset="1" stop-color="#009bfa" />
-            </linearGradient>
-            <linearGradient
-              id="New_Gradient_Swatch_copy_32"
-              x1="737.21"
-              y1="-142.13"
-              x2="197"
-              y2="98.93"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop offset="0" stop-color="#ed90f8" />
-              <stop offset="1" stop-color="#f2576c" />
-            </linearGradient>
-            <linearGradient
-              id="New_Gradient_Swatch_copy_26"
-              x1="301.17"
-              y1="182.61"
-              x2="347.5"
-              y2="291.39"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop offset="0" stop-color="#f3d065" />
-              <stop offset="1" stop-color="#fa9d82" />
-            </linearGradient>
-            <linearGradient
-              id="New_Gradient_Swatch_copy_21-2"
-              x1="217.62"
-              y1="-14.72"
-              x2="-85.69"
-              y2="193.62"
-              xlink:href="#New_Gradient_Swatch_copy_21"
-            />
-            <linearGradient
-              id="New_Gradient_Swatch_copy_26-2"
-              x1="217.62"
-              y1="384.72"
-              x2="-85.69"
-              y2="593.06"
-              xlink:href="#New_Gradient_Swatch_copy_26"
-            />
-            <linearGradient
-              id="New_Gradient_Swatch_copy_32-2"
-              x1="532.03"
-              y1="241.97"
-              x2="308.39"
-              y2="372.82"
-              xlink:href="#New_Gradient_Swatch_copy_32"
-            />
-          </defs>
-          <g id="Layer_2-2">
-            <path
-              class="cls-2"
-              d="m79.89,239.66h79.89v239.66c0,44.09-35.8,79.89-79.89,79.89h0C35.8,559.21,0,523.42,0,479.33v-159.78C0,275.46,35.8,239.66,79.89,239.66Z"
-            />
-            <path
-              class="cls-4"
-              d="m399.44,159.78H77.51C34.7,159.79,0,125.09,0,82.28v-2.01C0,35.77,35.77,0,79.89,0h319.55c44.12,0,79.89,35.77,79.89,79.89h0c0,44.12-35.77,79.89-79.89,79.89Z"
-            />
-            <path
-              class="cls-1"
-              d="m239.66,239.66h159.78c44.09,0,79.89,35.8,79.89,79.89h0c0,44.09-35.8,79.89-79.89,79.89h-79.89c-44.09,0-79.89-35.8-79.89-79.89v-79.89h0Z"
-            />
-            <circle class="cls-3" cx="79.89" cy="79.89" r="79.89" />
-            <circle class="cls-6" cx="79.89" cy="479.33" r="79.89" />
-            <circle class="cls-5" cx="399.44" cy="319.55" r="79.89" />
-          </g>
-        </svg>
+        <app-logo id="logo-icon"></app-logo>
       </a>
       Fidlit
     </ion-title>
@@ -114,49 +12,131 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Fidlit</ion-title>
+      <ion-title size="large">
+        <a href="/">
+          <app-logo id="logo-icon"></app-logo>
+        </a>
+        Fidlit
+      </ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <ion-toolbar>
-      <ion-select
-        interface="action-sheet"
-        placeholder="Select an industry"
-        (ionChange)="selectIndustry($event)"
-      >
-        <ion-select-option value="aerospace-and-defense"
-          >Aerospace and Defense</ion-select-option
-        >
-        <ion-select-option value="airlines">Airlines</ion-select-option>
-        <ion-select-option value="automotive">Automotive</ion-select-option>
-        <ion-select-option value="banking">Banking</ion-select-option>
-        <ion-select-option value="broadcasting">Broadcasting</ion-select-option>
-      </ion-select>
-    </ion-toolbar>
-    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-      <!-- This is the tree node template for leaf nodes -->
-      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-        <!-- use a disabled button to provide padding for tree leaf -->
-        <button mat-icon-button disabled></button>
-        {{node.name}}
-      </mat-tree-node>
-      <!-- This is the tree node template for expandable nodes -->
-      <mat-tree-node
-        *matTreeNodeDef="let node;when: hasChild"
-        matTreeNodePadding
-      >
-        <button
-          mat-icon-button
-          matTreeNodeToggle
-          [attr.aria-label]="'Toggle ' + node.name"
-        >
-          <mat-icon class="mat-icon-rtl-mirror">
-            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-          </mat-icon>
-        </button>
-        {{node.name}}
-      </mat-tree-node>
-    </mat-tree>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title> Organization </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-label position="stacked">Title:</ion-label>
+            <ion-input
+              placeholder="The title of your organization"
+              [ngModel]="companyName"
+              required
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Industry:</ion-label>
+            <ion-select
+              interface="action-sheet"
+              placeholder="Select an industry"
+              cancelText="Cancel industry selection"
+              [interfaceOptions]="industrySelectorOptions"
+              [(ngModel)]="selectedIndustry"
+            >
+              <ion-select-option *ngFor="let industry of industries; index as i"
+                >{{industry}}</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-button
+              shape="round"
+              fill="clear"
+              slot="end"
+              color="medium"
+              (click)="toggleMissionVisionHelpDisplay(true)"
+            >
+              <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
+            </ion-button>
+            <ion-label position="stacked">Mission statement:</ion-label>
+            <ion-textarea
+              placeholder="The organizational mission statement"
+              [ngModel]="missionStatement"
+              autoGrow
+              required
+              spellcheck
+            ></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-button
+              shape="round"
+              fill="clear"
+              slot="end"
+              color="medium"
+              (click)="toggleMissionVisionHelpDisplay(true)"
+            >
+              <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
+            </ion-button>
+            <ion-label position="stacked">Vision statement:</ion-label>
+            <ion-textarea
+              placeholder="The organizational vision statement"
+              [ngModel]="visionStatement"
+              autoGrow
+              required
+              spellcheck
+            ></ion-textarea>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+      <ion-button fill="clear" (click)="reloadCompanyName()">
+        <ion-icon name="reload-outline" slot="start"></ion-icon>
+        Generate Random
+      </ion-button>
+    </ion-card>
   </div>
+  <ion-modal [isOpen]="isMissionVisionHelpVisible">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Mission vs. Vision</ion-title>
+          <ion-buttons slot="end">
+            <ion-button
+              (click)="toggleMissionVisionHelpDisplay(false)"
+              [strong]="true"
+              >Close</ion-button
+            >
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <p>
+          An organization's mission statement and a vision statement are both
+          important components of an organization's strategy and provide
+          direction for decision-making and goal-setting. However, they serve
+          different purposes and focus on different aspects of the
+          organization's future.
+        </p>
+        <p>
+          A mission statement defines the purpose and focus of an organization,
+          and outlines what the company does and why it exists. It provides a
+          framework for decision-making and guides the company's actions and
+          priorities.
+        </p>
+        <p>
+          A vision statement, on the other hand, is a more aspirational
+          statement that defines the organization's desired future state and
+          what it wants to achieve. It is a long-term view of what the company
+          wants to become and serves as a source of inspiration and motivation
+          for employees.
+        </p>
+        <p>
+          In summary, a mission statement answers the question "What do we do?"
+          while a vision statement answers the question "What do we want to
+          become?"
+        </p>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
