@@ -33,7 +33,8 @@ check: check-lint check-unit check-e2e
 
 .PHONY: install
 install:
-	@yarn build
+	@yarn build \
+	&& cp ./www/index.html ./www/404.html
 
 .PHONY: start
 start:
