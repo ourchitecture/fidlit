@@ -1,75 +1,62 @@
-const fs = require("fs");
+const fs = require("fs").promises;
 const path = require("path");
 const readXlsxFile = require("read-excel-file/node");
 
-const main = async () => {
+const prepare = async (name) => {
   const capabilities = [];
 
-  const airlineFilePath = path.join(__dirname, "./excel/airline.xlsx");
+  const filePath = path.join(__dirname, `./excel/${name}.xlsx`);
 
-  console.log("Reading airline industry capabilities...");
+  console.log(`Reading "${name}" industry capabilities...`);
 
-  const airlineCapabilityRowMap = {
+  const capabilityRowMap = {
     "Hierarchy ID": "code",
     Name: "name",
   };
 
-  const airlineCapabilityRows = await readXlsxFile(airlineFilePath, {
+  const capabilityRows = await readXlsxFile(filePath, {
     sheet: "Combined",
-    map: airlineCapabilityRowMap,
+    map: capabilityRowMap,
   });
 
-  // console.debug("# of airline capabilities", airlineCapabilityRows);
+  // console.debug(`# of ${name} capabilities`, capabilityRowMap);
 
-  capabilities.push(...airlineCapabilityRows.rows);
+  capabilities.push(...capabilityRows.rows);
 
-  // const airlineCategoryRows = await readXlsxFile(airlineFilePath, {
-  //   sheet: "Categories",
-  //   map: airlineRowMap,
-  // });
-
-  // // console.debug("# of airline categories", airlineCategoryRows);
-
-  // for (const airlineCategoryRow of airlineCategoryRows.rows) {
-  //   // NOTE: The category capability is already present in the child sheets.
-  //   // capabilities.push(airlineCategoryRow);
-
-  //   const categoryCode = airlineCategoryRow.code;
-
-  //   console.log(`Reading airline industry ${categoryCode} capabilities...`);
-
-  //   const airlineCapabilitiesRows = await readXlsxFile(airlineFilePath, {
-  //     sheet: categoryCode,
-  //     map: airlineRowMap,
-  //   });
-
-  //   // console.debug(
-  //   //   `# of ${categoryCode} airline capabilities`,
-  //   //   airlineCapabilitiesRows
-  //   // );
-
-  //   capabilities.push(...airlineCapabilitiesRows.rows);
-
-  //   console.log(
-  //     `Successfully read airline industry ${categoryCode} capabilities.`
-  //   );
-  // }
-
-  console.log("Successfully read airline industry capabilities.");
+  console.log(
+    `Successfully read ${capabilities.length} "${name}" industry capabilities.`
+  );
 
   // console.debug("capabilities", capabilities);
 
   const result = {
     version: "0.1",
+    name,
     createdOn: new Date(),
     capabilities,
   };
 
-  fs.writeFileSync(
-    "./dist/airline-industry-capabilities.json",
+  await fs.writeFile(
+    `./dist/${name}-industry-capabilities.json`,
     JSON.stringify(result),
     { encoding: "utf-8" }
   );
+
+  return result;
+};
+
+const main = async () => {
+  const industries = [
+    "aerospace-and-defense",
+    "airline",
+    "automotive",
+    "banking",
+    "broadcasting",
+  ];
+
+  for (let industry of industries) {
+    await prepare(industry);
+  }
 };
 
 (async () => {

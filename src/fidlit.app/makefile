@@ -63,6 +63,15 @@ update:
     @angular/language-service@^15 \
     --create-commits
 
+.PHONY: clean
+clean:
+	@rm -rf ./node_modules/ ./www/
+
+.PHONY: clean-reset
+clean-reset: clean
+	@rm -rf ./.angular/ ./yarn.lock
+	@"$(MAKE)" reinit
+
 .PHONY: root
 root:
 	@code -r ../../

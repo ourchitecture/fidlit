@@ -1,32 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fidlit</title>
 
-<head>
-  <meta charset="utf-8"/>
-  <title>Ionic App</title>
+    <base href="/" />
 
-  <base href="/"/>
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
 
-  <meta name="color-scheme" content="light dark"/>
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <meta name="format-detection" content="telephone=no"/>
-  <meta name="msapplication-tap-highlight" content="no"/>
+    <!-- https://www.emergeinteractive.com/insights/detail/the-essentials-of-favicons/ -->
+    <!-- https://joyofcode.xyz/dark-mode-favicon -->
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: dark)"
+      type="image/svg+xml"
+      href="assets/icons/favicon-dark.svg"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: dark)"
+      type="image/png"
+      href="assets/icons/favicon-dark-16.png"
+      sizes="16x16"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: dark)"
+      type="image/png"
+      href="assets/icons/favicon-dark-32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: dark)"
+      type="image/png"
+      href="assets/icons/favicon-dark-57.png"
+      sizes="57x57"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: dark)"
+      type="image/png"
+      href="assets/icons/favicon-dark-76.png"
+      sizes="76x76"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: dark)"
+      type="image/png"
+      href="assets/icons/favicon-dark-96.png"
+      sizes="96x96"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: dark)"
+      type="image/png"
+      href="assets/icons/favicon-dark-128.png"
+      sizes="128x128"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: dark)"
+      type="image/png"
+      href="assets/icons/favicon-dark-192.png"
+      sizes="192x192"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: dark)"
+      type="image/png"
+      href="assets/icons/favicon-dark-228.png"
+      sizes="228x228"
+    />
 
-  <link rel="icon" type="image/png" href="assets/icon/favicon.png"/>
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: light)"
+      type="image/svg+xml"
+      href="assets/icons/favicon-light.svg"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: light)"
+      type="image/png"
+      href="assets/icons/favicon-light-16.png"
+      sizes="16x16"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: light)"
+      type="image/png"
+      href="assets/icons/favicon-light-32.png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: light)"
+      type="image/png"
+      href="assets/icons/favicon-light-57.png"
+      sizes="57x57"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: light)"
+      type="image/png"
+      href="assets/icons/favicon-light-76.png"
+      sizes="76x76"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: light)"
+      type="image/png"
+      href="assets/icons/favicon-light-96.png"
+      sizes="96x96"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: light)"
+      type="image/png"
+      href="assets/icons/favicon-light-128.png"
+      sizes="128x128"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: light)"
+      type="image/png"
+      href="assets/icons/favicon-light-192.png"
+      sizes="192x192"
+    />
+    <link
+      rel="icon"
+      media="(prefers-color-scheme: light)"
+      type="image/png"
+      href="assets/icons/favicon-light-228.png"
+      sizes="228x228"
+    />
 
-  <!-- add to homescreen for ios -->
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#1976d2">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
+    <!-- add to homescreen for ios -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
-<body class="mat-typography">
-  <app-root></app-root>
-  <noscript>Please enable JavaScript to continue using this application.</noscript>
-</body>
+    <link rel="manifest" href="manifest.webmanifest" />
 
+    <meta name="theme-color" content="#1976d2" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="mat-typography">
+    <app-root></app-root>
+    <noscript
+      >Please enable JavaScript to continue using this application.</noscript
+    >
+  </body>
 </html>

@@ -17,6 +17,8 @@ reinit:
 init:
 	@cd $(site_path) \
 	&& "$(MAKE)" $@
+	@cd $(capability_models_path) \
+	&& "$(MAKE)" $@
 
 .PHONY: check
 check:
@@ -50,6 +52,20 @@ dev:
 	@cd $(site_path) \
 	&& "$(MAKE)" $@
 
+.PHONY: clean
+clean:
+	@cd $(capability_models_path) \
+	&& "$(MAKE)" $@
+	@cd $(site_path) \
+	&& "$(MAKE)" $@
+
+.PHONY: clean-reset
+clean-reset:
+	@cd $(capability_models_path) \
+	&& "$(MAKE)" $@
+	@cd $(site_path) \
+	&& "$(MAKE)" $@
+
 .PHONY: ws
 ws:
 	@code -r $(site_path)fidlit-app.code-workspace
@@ -61,6 +77,18 @@ capability-models:
 	@cp \
 		$(capability_models_path)dist/airline-industry-capabilities.json \
 		$(site_path)src/api/examples/industries/airlines/capabilities.json
+	@cp \
+		$(capability_models_path)dist/aerospace-and-defense-industry-capabilities.json \
+		$(site_path)src/api/examples/industries/aerospace-and-defense/capabilities.json
+	@cp \
+		$(capability_models_path)dist/automotive-industry-capabilities.json \
+		$(site_path)src/api/examples/industries/automotive/capabilities.json
+	@cp \
+		$(capability_models_path)dist/banking-industry-capabilities.json \
+		$(site_path)src/api/examples/industries/banking/capabilities.json
+	@cp \
+		$(capability_models_path)dist/broadcasting-industry-capabilities.json \
+		$(site_path)src/api/examples/industries/broadcasting/capabilities.json
 
 .PHONY: sync
 sync:

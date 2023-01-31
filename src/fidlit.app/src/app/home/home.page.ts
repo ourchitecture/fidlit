@@ -52,53 +52,60 @@ export class HomePage {
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
+  selectedIndustry = undefined;
+
   constructor(private http: HttpClient) {
-    http
-      .get('api/examples/industries/airlines/capabilities.json')
-      .subscribe((response: any) => {
-        // console.log('capabilities response', response);
-        const rawCapabilities = response.capabilities;
+    this.dataSource.data = [];
+  }
 
-        const allCapabilities: any[] = [];
-        const capabilities: any[] = [];
+  selectIndustry(ev: any) {
+    this.selectedIndustry = ev.target.value;
 
-        rawCapabilities.forEach((rawCapability: any) => {
-          const code = rawCapability.code.replace('.0', '');
+    // console.log('Industry change', this.selectedIndustry);
 
-          const capability = {
-            code,
-            name: `${rawCapability.code} ${rawCapability.name}`,
-            children: [],
-          };
+    const url = `api/examples/industries/${this.selectedIndustry}/capabilities.json`;
 
-          console.log('capability', capability);
+    this.http.get(url).subscribe((response: any) => {
+      // console.log('capabilities response', response);
+      const rawCapabilities = response.capabilities;
 
-          allCapabilities.push(capability);
+      const allCapabilities: any[] = [];
+      const capabilities: any[] = [];
 
-          const parentCode = code.substring(0, code.lastIndexOf('.'));
+      rawCapabilities.forEach((rawCapability: any) => {
+        const code = rawCapability.code.replace('.0', '');
 
-          if (code.indexOf('.') > 0) {
-            const parentCapability = allCapabilities.find(
-              (cap) => cap.code == parentCode
+        const capability = {
+          code,
+          name: `${rawCapability.code} ${rawCapability.name}`,
+          children: [],
+        };
+
+        // console.debug('capability', capability);
+
+        allCapabilities.push(capability);
+
+        const parentCode = code.substring(0, code.lastIndexOf('.'));
+
+        if (code.indexOf('.') > 0) {
+          const parentCapability = allCapabilities.find(
+            (cap) => cap.code == parentCode
+          );
+
+          if (!parentCapability) {
+            throw new Error(
+              `Unexpected error missing parent capability "${parentCode}" for "${rawCapability.code}".`
             );
-
-            if (!parentCapability) {
-              console.log('all', allCapabilities);
-              throw new Error(
-                `Unexpected error missing parent capability "${parentCode}" for "${rawCapability.code}".`
-              );
-            }
-
-            parentCapability.children.push(capability);
-          } else {
-            capabilities.push(capability);
           }
-        });
 
-        this.dataSource.data = capabilities;
+          parentCapability.children.push(capability);
+        } else {
+          capabilities.push(capability);
+        }
       });
 
-    this.dataSource.data = [];
+      this.dataSource.data = capabilities;
+    });
   }
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
