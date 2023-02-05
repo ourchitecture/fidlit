@@ -55,6 +55,7 @@ jobs:
 
       - name: install
         run: |
+          find . -type f -iname "*.sh" -exec chmod +x {} \;
           make all
           sudo chown -R $(whoami) ./docs
 
