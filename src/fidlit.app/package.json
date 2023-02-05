@@ -5,7 +5,7 @@
   "description": "An organization simulator",
   "author": "Eric Swanson",
   "homepage": "https://fidlit.app/",
-  "license": "UNLICENSED",
+  "license": "AGPL-3.0-only",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

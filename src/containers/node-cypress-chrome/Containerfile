@@ -14,3 +14,6 @@ ARG EDGE_VERSION=109.0.1518.52-1
 ARG BASE_IMAGE_PATH=${BASE_IMAGE_REGISTRY}${BASE_IMAGE_NAME}:cypress-${CYPRESS_VERSION}-node-${NODE_VERSION}-chrome-${CHROME_VERSION}-edge-${EDGE_VERSION}
 
 FROM ${BASE_IMAGE_PATH} as base
+
+LABEL org.opencontainers.image.source=https://github.com/ourchitecture/fidlit
+LABEL org.opencontainers.image.description="The latest node + Cypress testing + chrome installation"

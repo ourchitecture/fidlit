@@ -12,6 +12,11 @@ checkToolSupported $tool
 if [ x"${IN_CONTAINER}" = "x" ]; then
   checkContainersInstalled $tool
 
+  # Do not share the ".angular" directory across containers.
+  if [ -d "./.angular" ]; then
+    rm -rf ./.angular/
+  fi
+
   tag_name="${TAG_NAME:-localhost/fidlit/node-chrome:latest}"
 
   containerRunEntrypointCommandOnVolume \
@@ -24,10 +29,6 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
 else
   checkYarnInstalled
   checkNodeDependenciesDirectory
-
-  if [ -d "./.angular" ]; then
-    rm -rf ./.angular/
-  fi
 
   yarn test
 fi

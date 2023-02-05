@@ -1,5 +1,9 @@
+tool:=podman
+
 capability_models_path=./src/capability-models/
 site_path=./src/fidlit.app/
+
+ghcr_token_file_path:=../GITHUB_TOKEN_FIDLIT_PACKAGES_RW
 
 .DEFAULT_GOAL:=all
 
@@ -115,6 +119,13 @@ main:
 	@git checkout main
 	@git sync
 	@git prune-branches
+
+.PHONY: login-ghcr
+login-ghcr:
+ifndef username
+	$(error Missing required argument "username")
+endif
+	@cat $(ghcr_token_file_path) | $(tool) login ghcr.io -u $(username) --password-stdin
 
 # kept for posterity
 # .PHONY: create

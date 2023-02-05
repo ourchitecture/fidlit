@@ -1,0 +1,42 @@
+name: containers-node-cd
+
+on: [push, pull_request]
+
+# on:
+#   workflow_run:
+#     workflows: [docker-devops-java_cd]
+#     branches: [main]
+#     types: [completed]
+#   push:
+#     branches: [main]
+#     paths:
+#       # run this build when this file changes
+#       - ".github/workflows/containers_node_cd.yml"
+#       # run this build when the source code changes
+#       - "src/containers/node/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      PROJECT_PATH: ./src/containers/node/
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: login
+        env:
+          CONTAINER_USERNAME: ${{ secrets.FIDLIT_GITHUB_PACKAGES_CONTAINER_USERNAME }}
+          CONTAINER_PASSWORD: ${{ secrets.FIDLIT_GITHUB_PACKAGES_CONTAINER_TOKEN }}
+        run: |
+          find . -type f -iname "*.sh" -exec chmod +x {} \;
+          echo ${env.CONTAINER_PASSWORD} > ./CONTAINER_PASSWORD
+          make login-ghcr username=${env.CONTAINER_USERNAME} ghcr_token_file_path=./CONTAINER_PASSWORD
+
+      - name: install
+        # change to the tutorial directory
+        working-directory: ${{env.PROJECT_PATH}}
+        run: |
+          make all
+          make deploy

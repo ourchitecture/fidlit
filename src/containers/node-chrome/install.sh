@@ -17,8 +17,13 @@ if ! command -v ${tool} >/dev/null 2>&1; then
 fi
 
 tag_name="${TAG_NAME:-localhost/fidlit/node-chrome:latest}"
+gh_tag_name="${TAG_NAME:-ghcr.io/ourchitecture/fidlit/node-chrome:latest}"
 
 ${tool} build \
   --tag="$tag_name" \
   --file=./Containerfile \
   .
+
+${tool} tag \
+  "$tag_name" \
+  "$gh_tag_name"

@@ -16,14 +16,6 @@ if ! command -v ${tool} >/dev/null 2>&1; then
   exit 1
 fi
 
-tag_name="${TAG_NAME:-localhost/fidlit/node-cypress-chrome:latest}"
-gh_tag_name="${TAG_NAME:-ghcr.io/ourchitecture/fidlit/node-cypress-chrome:latest}"
+gh_tag_name="${TAG_NAME:-ghcr.io/ourchitecture/fidlit/node:latest}"
 
-${tool} build \
-  --tag="$tag_name" \
-  --file=./Containerfile \
-  .
-
-${tool} tag \
-  "$tag_name" \
-  "$gh_tag_name"
+${tool} push "$gh_tag_name"

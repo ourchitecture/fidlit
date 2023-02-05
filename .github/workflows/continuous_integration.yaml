@@ -53,26 +53,27 @@ jobs:
           cache: ${{ env.YARN_CACHE_NAME }}
           cache-dependency-path: ${{ env.YARN_CACHE_PATH }}
 
-      - name: install
-        run: |
-          find . -type f -iname "*.sh" -exec chmod +x {} \;
-          make all
-          sudo chown -R $(whoami) ./docs
+      # - name: install
+      #   run: |
+      #     find . -type f -iname "*.sh" -exec chmod +x {} \;
+      #     touch ./src/fidlit.app/.env
+      #     make all
+      #     sudo chown -R $(whoami) ./docs
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
-        # If push to main, avoid infinite loop.
-        if: |
-          github.event_name == env.PUSH_EVENT &&
-          github.ref == env.MAIN_BRANCH_REF &&
-          !contains(github.event.head_commit.message, env.OUR_CREATE_PR)
-        with:
-          title: ${{ env.OUR_AUTODOC_COMMIT }}
-          signoff: true
-          commit-message: "${{ env.OUR_AUTODOC_COMMIT }} ${{ env.OUR_SKIP_CI }}"
-          body: ${{ env.OUR_AUTODOC_DESC }}
-          labels: ${{ env.OUR_AUTODOC_LABELS }}
-          assignees: ${{ env.OUR_AUTODOC_ASSIGNEES }}
-          # a PAT was generated to support this field
-          # see: https://github.com/peter-evans/create-pull-request/issues/155
-          team-reviewers: ${{ env.OUR_AUTODOC_REVIEWERS }}
+      # # - name: Create Pull Request
+      # #   uses: peter-evans/create-pull-request@v4
+      # #   # If push to main, avoid infinite loop.
+      # #   if: |
+      # #     github.event_name == env.PUSH_EVENT &&
+      # #     github.ref == env.MAIN_BRANCH_REF &&
+      # #     !contains(github.event.head_commit.message, env.OUR_CREATE_PR)
+      # #   with:
+      # #     title: ${{ env.OUR_AUTODOC_COMMIT }}
+      # #     signoff: true
+      # #     commit-message: "${{ env.OUR_AUTODOC_COMMIT }} ${{ env.OUR_SKIP_CI }}"
+      # #     body: ${{ env.OUR_AUTODOC_DESC }}
+      # #     labels: ${{ env.OUR_AUTODOC_LABELS }}
+      # #     assignees: ${{ env.OUR_AUTODOC_ASSIGNEES }}
+      # #     # a PAT was generated to support this field
+      # #     # see: https://github.com/peter-evans/create-pull-request/issues/155
+      # #     team-reviewers: ${{ env.OUR_AUTODOC_REVIEWERS }}

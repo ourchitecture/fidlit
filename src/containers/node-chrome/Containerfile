@@ -27,3 +27,6 @@ RUN apk update \
       yarn
 
 USER chrome
+
+LABEL org.opencontainers.image.source=https://github.com/ourchitecture/fidlit
+LABEL org.opencontainers.image.description="The latest node + chrome installation"
