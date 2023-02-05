@@ -34,7 +34,7 @@ fidlit-app:
 	@echo 'Recreating the ./docs/ distribution...' \
 	&& rm -rf ./docs/ \
 	&& mkdir ./docs/ \
-	&& cp -r $(site_path)dist/ ./docs/ \
+	&& cp -r $(site_path)dist/* ./docs/ \
 	&& echo 'Successfully recreated the ./docs/ distribution.'
 
 .PHONY: install

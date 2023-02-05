@@ -10,9 +10,9 @@ on:
       - edited
       - synchronize
     paths:
-      # run this build when this file changes
+      # Run this build when this file changes.
       - ".github/workflows/containers_node-cypress-chrome_ci.yaml"
-      # run this build when the source code changes
+      # Run this build when the source code changes.
       - "src/containers/node-cypress-chrome/**"
 
 env:

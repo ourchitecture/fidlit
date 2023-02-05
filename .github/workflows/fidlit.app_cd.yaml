@@ -27,10 +27,12 @@ on:
   push:
     branches: [main]
     paths:
-      # run this build when this file changes
+      # Run this build when this file changes.
       - ".github/workflows/fidlit.app_cd.yaml"
-      # run this build when the source code changes
+      # Run this build when the source code changes.
       - "src/fidlit.app/**"
+      # run this build when the makefile changes
+      - "makefile"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
