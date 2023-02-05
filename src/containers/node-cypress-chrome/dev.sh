@@ -16,7 +16,11 @@ if ! command -v ${tool} >/dev/null 2>&1; then
   exit 1
 fi
 
-tag_name="${TAG_NAME:-localhost/fidlit/node-cypress-chrome:latest}"
+if [ x"${LOCAL_CONTAINERS}" = "x" ]; then
+  tag_name="${TAG_NAME:-ghcr.io/ourchitecture/fidlit/node-cypress-chrome:latest}"
+else
+  tag_name="${TAG_NAME:-localhost/fidlit/node-cypress-chrome:latest}"
+fi
 
 ${tool} run \
   --name "fidlit-node-cypress-chrome-dev" \

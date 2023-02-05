@@ -19,3 +19,6 @@ RUN apk update \
 RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
+
+LABEL org.opencontainers.image.source=https://github.com/ourchitecture/fidlit
+LABEL org.opencontainers.image.description="The latest node and yarn installation"

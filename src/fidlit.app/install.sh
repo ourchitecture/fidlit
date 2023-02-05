@@ -12,7 +12,16 @@ checkToolSupported $tool
 if [ x"${IN_CONTAINER}" = "x" ]; then
   checkContainersInstalled $tool
 
-  tag_name="${TAG_NAME:-localhost/fidlit/node:latest}"
+  # Do not share the ".angular" directory across containers.
+  if [ -d "./.angular" ]; then
+    rm -rf ./.angular/
+  fi
+
+  if [ x"${LOCAL_CONTAINERS}" = "x" ]; then
+    tag_name="${TAG_NAME:-ghcr.io/ourchitecture/fidlit/node:latest}"
+  else
+    tag_name="${TAG_NAME:-localhost/fidlit/node:latest}"
+  fi
 
   containerRunEntrypointCommandOnVolume \
     $tool \
@@ -24,10 +33,6 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
 else
   checkYarnInstalled
   checkNodeDependenciesDirectory
-
-  if [ -d "./.angular" ]; then
-    rm -rf ./.angular/
-  fi
 
   yarn build
 
