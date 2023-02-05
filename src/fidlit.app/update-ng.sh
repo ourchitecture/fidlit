@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source ./_utils.sh
+. ./_utils.sh
 
 # NOTE: for debugging, add `-x`
 set -e
