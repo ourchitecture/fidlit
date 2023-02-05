@@ -1,0 +1,9 @@
+# Ideally, this file would be named ".containerignore", but the `docker` CLI
+# does not provide support for this or a method to specify a custom name for
+# this file.
+
+node_modules/
+.editorconfig
+.gitignore
+makefile
+*.sh

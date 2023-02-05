@@ -45,7 +45,24 @@ const prepare = async (name) => {
   return result;
 };
 
+const ensureExists = async (path, mask) => {
+  // Optional mask.
+  if (!mask) {
+    mask = 0o744;
+  }
+
+  try {
+    await fs.mkdir(path, mask);
+  } catch (e) {
+    if (e.code !== "EEXIST") {
+      throw e;
+    }
+  }
+};
+
 const main = async () => {
+  await ensureExists("./dist/");
+
   const industries = [
     "aerospace-and-defense",
     "airline",

@@ -5,74 +5,52 @@
 .PHONY: all
 all: init check install
 
-# updates "yarn.lock"
-.PHONY: reinit
-reinit:
-	@yarn install
-
 .PHONY: init
 init:
-	@yarn install \
-    --frozen-lockfile \
-    --non-interactive
+	@./init.sh
 
 .PHONY: check-lint
 check-lint:
-	@yarn lint
+	@./check-lint.sh
 
 .PHONY: check-unit
 check-unit:
-	@yarn test
+	@./check-unit.sh
 
 .PHONY: check-e2e
 check-e2e:
-	@yarn e2e
+	@./check-e2e.sh
 
 .PHONY: check
 check: check-lint check-unit check-e2e
 
 .PHONY: install
 install:
-	@yarn build \
-	&& cp ./www/index.html ./www/404.html
-
-.PHONY: start
-start:
-	@yarn start
+	@./install.sh
 
 .PHONY: dev
-dev: start
+dev:
+	@./dev.sh
 
-.PHONY: update
-update:
-	@yarn ng update \
-    @angular/common@^15 \
-    @angular/core@^15 \
-    @angular/forms@^15 \
-    @angular/platform-browser@^15 \
-    @angular/platform-browser-dynamic@^15 \
-    @angular/router@^15 \
-    @angular/service-worker@^15 \
-    @angular-devkit/build-angular@^15 \
-    @angular-eslint/builder@^15 \
-    @angular-eslint/eslint-plugin@^15 \
-    @angular-eslint/eslint-plugin-template@^15 \
-    @angular-eslint/template-parser@^15 \
-    @angular/cli@^15 \
-    @angular/compiler@^15 \
-    @angular/compiler-cli@^15 \
-    @angular/language-service@^15 \
-    --create-commits
+.PHONY: start
+start: dev
+
+.PHONY: serve
+serve: dev
+
+.PHONY: update-ng
+update-ng:
+	@./update-ng.sh
 
 .PHONY: clean
 clean:
-	@rm -rf ./node_modules/ ./www/
+	@rm -rf ./node_modules/ ./dist/
 
 .PHONY: clean-reset
 clean-reset: clean
 	@rm -rf ./.angular/ ./yarn.lock
-	@"$(MAKE)" reinit
+	@YARN_CLEAN_INSTALL=1 "$(MAKE)" init
 
-.PHONY: root
-root:
+.PHONY: root-ws
+root-ws:
 	@code -r ../../

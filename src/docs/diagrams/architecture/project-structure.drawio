@@ -1,0 +1,52 @@
+<mxfile host="65bd71144e">
+    <diagram id="MRL9LMyv42z-5sw1Hb9F" name="project-dependencies">
+        <mxGraphModel dx="1041" dy="535" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="8" value="Containers" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacing=10;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="30" y="270" width="160" height="290" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="capability-models" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;verticalAlign=top;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="270" y="240" width="170" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="node" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="320" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="node-chrome" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="400" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="node-cypress-chrome" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="50" y="480" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" style="edgeStyle=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=16;" parent="1" source="9" target="4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="install" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="295" y="280" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="fidlit.app" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;verticalAlign=top;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="270" y="380" width="170" height="300" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" style="edgeStyle=none;html=1;entryX=1;entryY=0.75;entryDx=0;entryDy=0;fontSize=16;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="12" target="4" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="install" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="295" y="420" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" style="edgeStyle=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=16;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="14" target="5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="check-unit" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="295" y="500" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" style="edgeStyle=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=16;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="15" target="6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="check-e2e" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;fontSize=16;" parent="1" vertex="1">
+                    <mxGeometry x="295" y="580" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

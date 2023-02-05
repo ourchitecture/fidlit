@@ -6,18 +6,11 @@ site_path=./src/fidlit.app/
 # NOTE: Do not defer to project `all` since `install`
 #       is a little different in the root.
 .PHONY: all
-all: init check install
-
-.PHONY: reinit
-reinit:
-	@cd $(site_path) \
-	&& "$(MAKE)" $@
+all: containers init check install
 
 .PHONY: init
 init:
 	@cd $(site_path) \
-	&& "$(MAKE)" $@
-	@cd $(capability_models_path) \
 	&& "$(MAKE)" $@
 
 .PHONY: check
@@ -35,7 +28,7 @@ install:
 	@rm -rf ./docs/ \
 	&& cd $(site_path) \
 	&& "$(MAKE)" $@ \
-	&& cp -r ./www/ ../../docs/
+	&& cp -r ./dist/ ../../docs/
 
 .PHONY: search-index
 search-index:
@@ -61,8 +54,6 @@ clean:
 
 .PHONY: clean-reset
 clean-reset:
-	@cd $(capability_models_path) \
-	&& "$(MAKE)" $@
 	@cd $(site_path) \
 	&& "$(MAKE)" $@
 
@@ -70,10 +61,29 @@ clean-reset:
 ws:
 	@code -r $(site_path)fidlit-app.code-workspace
 
+.PHONY: containers-node
+containers-node:
+	@cd ./src/containers/node/ \
+	&& "$(MAKE)" install
+
+.PHONY: containers-node-chrome
+containers-node-chrome:
+	@cd ./src/containers/node-chrome/ \
+	&& "$(MAKE)" install
+
+.PHONY: containers-cypress-chrome
+containers-cypress-chrome:
+	@cd ./src/containers/node-cypress-chrome/ \
+	&& "$(MAKE)" install
+
+.PHONY: containers
+containers: containers-node containers-node-chrome containers-cypress-chrome
+
 .PHONY: capability-models
-capability-models:
+capability-models: container-node
 	@cd $(capability_models_path) \
 	&& "$(MAKE)" install
+	@echo '' && echo 'Copying capability model distribution files to application...'
 	@cp \
 		$(capability_models_path)dist/airline-industry-capabilities.json \
 		$(site_path)src/api/examples/industries/airlines/capabilities.json
@@ -89,6 +99,7 @@ capability-models:
 	@cp \
 		$(capability_models_path)dist/broadcasting-industry-capabilities.json \
 		$(site_path)src/api/examples/industries/broadcasting/capabilities.json
+	@echo '' && echo 'Successfully copyied capability model distribution files to application.'
 
 .PHONY: sync
 sync:
