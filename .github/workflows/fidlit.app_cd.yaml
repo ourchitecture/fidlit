@@ -65,6 +65,14 @@ jobs:
           cache: ${{ env.YARN_CACHE_NAME }}
           cache-dependency-path: ${{ env.YARN_CACHE_PATH }}
 
+      - name: login
+        env:
+          CONTAINER_USERNAME: ${{ secrets.FIDLIT_GITHUB_PACKAGES_CONTAINER_USERNAME }}
+          CONTAINER_PASSWORD: ${{ secrets.FIDLIT_GITHUB_PACKAGES_CONTAINER_TOKEN }}
+        run: |
+          echo "${{ env.CONTAINER_PASSWORD }}" > ./CONTAINER_PASSWORD
+          make login-ghcr username="${{ env.CONTAINER_USERNAME }}" ghcr_token_file_path=./CONTAINER_PASSWORD
+
       - name: install
         working-directory: ${{env.PROJECT_PATH}}
         run: |
