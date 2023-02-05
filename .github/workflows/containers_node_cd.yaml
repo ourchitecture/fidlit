@@ -32,7 +32,7 @@ jobs:
         run: |
           find . -type f -iname "*.sh" -exec chmod +x {} \;
           echo "${{ env.CONTAINER_PASSWORD }}" > ./CONTAINER_PASSWORD
-          make login-ghcr username="${env.CONTAINER_USERNAME}" ghcr_token_file_path=./CONTAINER_PASSWORD
+          make login-ghcr username="${{ env.CONTAINER_USERNAME }}" ghcr_token_file_path=./CONTAINER_PASSWORD
 
       - name: install
         # change to the tutorial directory
