@@ -11,6 +11,7 @@ ARG BASE_IMAGE_PATH=${BASE_IMAGE_REGISTRY}${BASE_IMAGE_NAME}:${NODE_VERSION}-${B
 
 FROM ${BASE_IMAGE_PATH} as base
 
+# Upgrade all packages and dependencies.
 RUN apk update \
     && apk upgrade \
       --available \
