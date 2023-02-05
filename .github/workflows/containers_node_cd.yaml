@@ -8,7 +8,7 @@ on:
     branches: [main]
     paths:
       # run this build when this file changes
-      - ".github/workflows/containers_node_cd.yml"
+      - ".github/workflows/containers_node_cd.yaml"
       # run this build when the source code changes
       - "src/containers/node/**"
 

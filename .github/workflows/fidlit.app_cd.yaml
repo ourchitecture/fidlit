@@ -28,7 +28,7 @@ on:
     branches: [main]
     paths:
       # run this build when this file changes
-      - ".github/workflows/fidlit.app_cd.yml"
+      - ".github/workflows/fidlit.app_cd.yaml"
       # run this build when the source code changes
       - "src/fidlit.app/**"
 
