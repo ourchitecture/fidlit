@@ -3,20 +3,14 @@
 ################################################################################
 name: containers-node-cypress-chrome-cd
 
-on: [push, pull_request]
-
-# on:
-#   workflow_run:
-#     workflows: [docker-devops-java_cd]
-#     branches: [main]
-#     types: [completed]
-#   push:
-#     branches: [main]
-#     paths:
-#       # run this build when this file changes
-#       - ".github/workflows/containers-node-cypress-chrome-cd.yml"
-#       # run this build when the source code changes
-#       - "src/containers/node-cypress-chrome/**"
+on:
+  push:
+    branches: [main]
+    paths:
+      # run this build when this file changes
+      - ".github/workflows/containers-node-cypress-chrome-cd.yml"
+      # run this build when the source code changes
+      - "src/containers/node-cypress-chrome/**"
 
 jobs:
   deploy:
