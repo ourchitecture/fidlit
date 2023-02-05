@@ -25,6 +25,10 @@ else
   checkYarnInstalled
   checkNodeDependenciesDirectory
 
+  if [ -d "./.angular" ]; then
+    rm -rf ./.angular/
+  fi
+
   yarn build
 
   cp ./dist/index.html ./dist/404.html

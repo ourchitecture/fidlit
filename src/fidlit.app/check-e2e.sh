@@ -25,5 +25,9 @@ else
   checkYarnInstalled
   checkNodeDependenciesDirectory
 
+  if [ -d "./.angular" ]; then
+    rm -rf ./.angular/
+  fi
+
   yarn e2e
 fi

@@ -52,6 +52,7 @@ containerRunEntrypointCommandOnVolume() {
       --tty \
       --entrypoint "$container_entrypoint" \
       --env IN_CONTAINER="1" \
+      --env CI=1 \
       --env-file "./.env" \
       --volume "$container_volume":/usr/src/app \
       --workdir /usr/src/app \
@@ -65,6 +66,7 @@ containerRunEntrypointCommandOnVolume() {
       --tty \
       --entrypoint "$container_entrypoint" \
       --env IN_CONTAINER="1" \
+      --env CI=1 \
       --volume "$container_volume":/usr/src/app \
       --workdir /usr/src/app \
       "$container_tag" \

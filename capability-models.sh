@@ -1,6 +1,7 @@
 #!/bin/sh
 
-set -eu
+# NOTE: for debugging, add `-x`
+set -e
 
 tool="${FIDLIT_TOOL:-podman}"
 
@@ -11,12 +12,26 @@ if [ "$tool" != "docker" ]; then
   fi
 fi
 
-if ! command -v ${tool} >/dev/null 2>&1; then
-  echo "The CLI for ${tool} commands could not be found and must be installed." 1>&2
-  exit 1
-fi
+if [ x"${IN_CONTAINER}" = "x" ]; then
+  if ! command -v ${tool} >/dev/null 2>&1; then
+    echo "The CLI for ${tool} commands could not be found and must be installed." 1>&2
+    exit 1
+  fi
 
-if [ "$tool" = "shell" ]; then
+  tag_name="${TAG_NAME:-localhost/fidlit/capability-models:latest}"
+
+  ${tool} run \
+    --name "fidlit-capability-models" \
+    --rm \
+    --interactive \
+    --tty \
+    --entrypoint "/bin/ash" \
+    --env IN_CONTAINER=1 \
+    --env CI=1 \
+    --volume "$(pwd)/src/fidlit.app/":/workspace/out/ \
+    "$tag_name" \
+    ./capability-models.sh
+else
   out_path="${OUT_PATH:-/workspace/out/}"
   target_path="${out_path}src/api/examples/industries/"
 
@@ -39,17 +54,4 @@ if [ "$tool" = "shell" ]; then
   cp \
     /workspace/dist/broadcasting-industry-capabilities.json \
     ${target_path}broadcasting/capabilities.json
-else
-  tag_name="${TAG_NAME:-localhost/fidlit/capability-models:latest}"
-
-  ${tool} run \
-    --name "fidlit-capability-models" \
-    --rm \
-    --interactive \
-    --tty \
-    --entrypoint "/bin/ash" \
-    --env TOOL=shell \
-    --volume "$(pwd)/src/fidlit.app/":/workspace/out/ \
-    "$tag_name" \
-    ./capability-models.sh
 fi

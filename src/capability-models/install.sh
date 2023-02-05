@@ -7,10 +7,8 @@ tool="${FIDLIT_TOOL:-podman}"
 
 if [ "$tool" != "docker" ]; then
   if [ "$tool" != "podman" ]; then
-    if [ "$tool" != "shell" ]; then
-      echo "The \"tool\" argument value \"${tool}\" is not recognized." 1>&2
-      exit 1
-    fi
+    echo "The \"tool\" argument value \"${tool}\" is not recognized." 1>&2
+    exit 1
   fi
 fi
 
@@ -29,6 +27,7 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
     --tty \
     --entrypoint "/bin/ash" \
     --env IN_CONTAINER=1 \
+    --env CI=1 \
     --volume "$(pwd)":/usr/src/app \
     --workdir /usr/src/app \
     "$tag_name" \
