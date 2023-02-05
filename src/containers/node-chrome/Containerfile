@@ -1,0 +1,29 @@
+ARG BASE_IMAGE_REGISTRY=docker.io/zenika/
+ARG BASE_IMAGE_NAME=alpine-chrome
+ARG BASE_IMAGE_TAG=100-with-node
+
+ARG BASE_IMAGE_PATH=${BASE_IMAGE_REGISTRY}${BASE_IMAGE_NAME}:${BASE_IMAGE_TAG}
+
+FROM ${BASE_IMAGE_PATH} as base
+
+# Switch to root to update dependencies.
+USER root
+
+# The base container node version is behind latest, long-term support.
+# Remove and reinstall all node packages due to dependencies.
+RUN apk update \
+    && apk del \
+      nodejs \
+      nodejs-npm \
+      npm \
+      yarn \
+    && apk upgrade \
+      --available \
+      --no-cache \
+    && apk add \
+      nodejs \
+      nodejs-npm \
+      npm \
+      yarn
+
+USER chrome

@@ -1,0 +1,21 @@
+ARG BASE_IMAGE_REGISTRY=docker.io/library/
+ARG BASE_IMAGE_NAME=node
+ARG BASE_IMAGE_OS=alpine
+
+# https://github.com/nodejs/release#release-schedule
+ARG NODE_VERSION=18.13.0
+# https://alpinelinux.org/releases/
+ARG ALPINE_VERSION=3.17
+
+ARG BASE_IMAGE_PATH=${BASE_IMAGE_REGISTRY}${BASE_IMAGE_NAME}:${NODE_VERSION}-${BASE_IMAGE_OS}${ALPINE_VERSION}
+
+FROM ${BASE_IMAGE_PATH} as base
+
+RUN apk update \
+    && apk upgrade \
+      --available \
+      --no-cache
+
+RUN mkdir -p /usr/src/app
+
+WORKDIR /usr/src/app

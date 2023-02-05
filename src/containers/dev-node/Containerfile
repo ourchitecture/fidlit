@@ -1,0 +1,16 @@
+FROM localhost/fidlit/dev:latest as base
+
+ARG NODE_MAJOR_VERSION="18"
+
+# install node
+RUN curl -sL https://deb.nodesource.com/setup_${NODE_MAJOR_VERSION}.x | bash - \
+    && apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+        apt-get install -y --no-install-recommends \
+            nodejs \
+    # clean up layer: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
+    && rm -rf /var/lib/apt/lists/* \
+    # ensure latest npm
+    && npm install --location=global npm@latest \
+    # install yarn
+    && npm install --location=global yarn

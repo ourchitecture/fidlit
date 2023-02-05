@@ -70,3 +70,6 @@ Thumbs.db
 cypress/logs
 cypress/videos
 cypress/screenshots
+
+# Custom
+/dist

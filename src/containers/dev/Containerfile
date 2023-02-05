@@ -1,0 +1,29 @@
+ARG BASE_IMAGE_REGISTRY=docker.io/library/
+ARG BASE_IMAGE_NAME=debian
+
+ARG NODE_VERSION=18.13.0
+ARG DEBIAN_VERSION=11.6
+
+ARG BASE_IMAGE_PATH=${BASE_IMAGE_REGISTRY}${BASE_IMAGE_NAME}:${DEBIAN_VERSION}
+
+FROM ${BASE_IMAGE_PATH} as base
+
+# update and install general packages
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+        apt-get install -y --no-install-recommends \
+            software-properties-common \
+            apt-transport-https \
+            ca-certificates \
+            gnupg2 \
+            gnupg-agent \
+            git-all \
+            curl \
+            # build-essential includes `make`
+            build-essential \
+    # clean up layer: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /usr/src/app
+
+WORKDIR /usr/src/app
