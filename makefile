@@ -6,7 +6,7 @@ site_path=./src/fidlit.app/
 # NOTE: Do not defer to project `all` since `install`
 #       is a little different in the root.
 .PHONY: all
-all: init check install
+all: containers init check install
 
 .PHONY: init
 init:
@@ -61,25 +61,23 @@ clean-reset:
 ws:
 	@code -r $(site_path)fidlit-app.code-workspace
 
-.PHONY: container-chrome
-container-chrome:
-	@cd ./src/containers/chrome/ \
-	&& "$(MAKE)" install
-
-.PHONY: container-dev
-container-dev:
-	@cd ./src/containers/dev/ \
-	&& "$(MAKE)" install
-
-.PHONY: container-dev-node
-container-dev-node: container-dev
-	@cd ./src/containers/dev-node/ \
-	&& "$(MAKE)" install
-
-.PHONY: container-node
-container-node:
+.PHONY: containers-node
+containers-node:
 	@cd ./src/containers/node/ \
 	&& "$(MAKE)" install
+
+.PHONY: containers-node-chrome
+containers-node-chrome:
+	@cd ./src/containers/node-chrome/ \
+	&& "$(MAKE)" install
+
+.PHONY: containers-cypress-chrome
+containers-cypress-chrome:
+	@cd ./src/containers/node-cypress-chrome/ \
+	&& "$(MAKE)" install
+
+.PHONY: containers
+containers: containers-node containers-node-chrome containers-cypress-chrome
 
 .PHONY: capability-models
 capability-models: container-node
