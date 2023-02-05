@@ -3,7 +3,7 @@
 # 2. If a PR to main, creates a PR containing the "./docs" output
 # 3. Skips building that same PR again when pushed back to "main".
 ################################################################################
-name: continuous_integration
+name: continuous-integration
 
 # place "magic strings" used in the workflow here for convenient maintenance
 env:
