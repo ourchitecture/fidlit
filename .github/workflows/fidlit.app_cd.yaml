@@ -46,6 +46,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      PROJECT_PATH: ./src/fidlit.app/
+
     strategy:
       matrix:
         node-version: [18.x]
@@ -63,11 +66,15 @@ jobs:
           cache-dependency-path: ${{ env.YARN_CACHE_PATH }}
 
       - name: install
+        working-directory: ${{env.PROJECT_PATH}}
         run: |
           find . -type f -iname "*.sh" -exec chmod +x {} \;
-          touch ./src/fidlit.app/.env
+          touch ./.env
           make all
-          sudo chown -R $(whoami) ./docs
+          rm -rf ../../docs/
+          mkdir ../../docs/
+          cp -r ./dist/ ../../docs/
+          sudo chown -R $(whoami) ../../docs/
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4

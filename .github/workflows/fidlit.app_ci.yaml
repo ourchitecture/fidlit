@@ -41,7 +41,8 @@ jobs:
           cache-dependency-path: ${{ env.YARN_CACHE_PATH }}
 
       - name: install
+        working-directory: ${{env.PROJECT_PATH}}
         run: |
           find . -type f -iname "*.sh" -exec chmod +x {} \;
-          touch ./src/fidlit.app/.env
+          touch ./.env
           make all

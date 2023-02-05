@@ -34,7 +34,6 @@ jobs:
           make login-ghcr username="${{ env.CONTAINER_USERNAME }}" ghcr_token_file_path=./CONTAINER_PASSWORD
 
       - name: install
-        # change to the tutorial directory
         working-directory: ${{env.PROJECT_PATH}}
         run: |
           find . -type f -iname "*.sh" -exec chmod +x {} \;
