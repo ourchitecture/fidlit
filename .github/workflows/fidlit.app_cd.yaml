@@ -88,6 +88,8 @@ jobs:
           github.ref == env.MAIN_BRANCH_REF &&
           !contains(github.event.head_commit.message, env.OUR_CREATE_PR)
         with:
+          add-paths: |
+            docs/**
           title: ${{ env.OUR_AUTODOC_COMMIT }}
           signoff: true
           commit-message: "${{ env.OUR_AUTODOC_COMMIT }} ${{ env.OUR_SKIP_CI }}"
