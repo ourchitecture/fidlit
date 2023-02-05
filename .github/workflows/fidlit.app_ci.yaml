@@ -1,0 +1,47 @@
+################################################################################
+# Installs the Fidlit.app.
+################################################################################
+name: fidlit.app_ci
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
+    paths:
+      # run this build when this file changes
+      - ".github/workflows/fidlit.app_ci.yml"
+      # run this build when the source code changes
+      - "src/fidlit.app/**"
+
+# place "magic strings" used in the workflow here for convenient maintenance
+env:
+  CI: true
+  NG_CLI_ANALYTICS: ci
+  YARN_CACHE_NAME: "yarn"
+  YARN_CACHE_PATH: "./**/yarn.lock"
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+
+    env:
+      PROJECT_PATH: ./src/fidlit.app/
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          # See: https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
+          cache: ${{ env.YARN_CACHE_NAME }}
+          cache-dependency-path: ${{ env.YARN_CACHE_PATH }}
+
+      - name: install
+        run: |
+          find . -type f -iname "*.sh" -exec chmod +x {} \;
+          touch ./src/fidlit.app/.env
+          make all

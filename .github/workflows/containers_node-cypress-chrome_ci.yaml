@@ -1,0 +1,33 @@
+################################################################################
+# Installs and Deploys the node-cypress-chrome container as a GitHub package.
+################################################################################
+name: containers_node-cypress-chrome_ci
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
+    paths:
+      # run this build when this file changes
+      - ".github/workflows/containers_node-cypress-chrome_ci.yml"
+      # run this build when the source code changes
+      - "src/containers/node-cypress-chrome/**"
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+
+    env:
+      PROJECT_PATH: ./src/containers/node-cypress-chrome/
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install
+        # change to the tutorial directory
+        working-directory: ${{env.PROJECT_PATH}}
+        run: |
+          find . -type f -iname "*.sh" -exec chmod +x {} \;
+          make all
