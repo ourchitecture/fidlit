@@ -11,7 +11,7 @@ on:
       - synchronize
     paths:
       # run this build when this file changes
-      - ".github/workflows/containers_node_ci.yml"
+      - ".github/workflows/containers_node_ci.yaml"
       # run this build when the source code changes
       - "src/containers/node/**"
 

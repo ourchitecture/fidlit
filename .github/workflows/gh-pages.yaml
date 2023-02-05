@@ -6,7 +6,7 @@ on:
     branches: ["main"]
     paths:
       # run this build when this file changes
-      - ".github/workflows/gh-pages.yml"
+      - ".github/workflows/gh-pages.yaml"
       # run this build when the source code changes
       - "docs/**"
 
@@ -38,7 +38,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: './docs'
+          path: "./docs"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
