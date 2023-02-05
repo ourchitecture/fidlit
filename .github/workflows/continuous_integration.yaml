@@ -32,7 +32,7 @@ jobs:
     # Do not re-run a push from "create-pull-request" action.
     # NOTE: Cannot use `env`: https://github.com/actions/runner/issues/1189#issuecomment-880110759
     if: |
-      github.repository == 'ourchitecture/fiddlit'
+      github.repository == 'ourchitecture/fidlit'
       && !contains(github.event.head_commit.message, 'ourchitecture/create-pull-request/patch')
 
     runs-on: ubuntu-latest
