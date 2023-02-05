@@ -44,12 +44,11 @@ containerRunEntrypointCommandOnVolume() {
   container_command="$5"
   container_volume="$6"
 
+  # TODO: dynamic arguments like https://stackoverflow.com/questions/28678505/add-command-arguments-using-inline-if-statement-in-bash
   if [ -f "./.env" ]; then
     ${container_tool} run \
       --name "$container_name" \
       --rm \
-      --interactive \
-      --tty \
       --entrypoint "$container_entrypoint" \
       --env IN_CONTAINER="1" \
       --env CI=1 \
@@ -62,8 +61,6 @@ containerRunEntrypointCommandOnVolume() {
     ${container_tool} run \
       --name "$container_name" \
       --rm \
-      --interactive \
-      --tty \
       --entrypoint "$container_entrypoint" \
       --env IN_CONTAINER="1" \
       --env CI=1 \

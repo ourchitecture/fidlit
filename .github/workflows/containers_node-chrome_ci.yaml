@@ -15,6 +15,9 @@ on:
       # run this build when the source code changes
       - "src/containers/node-chrome/**"
 
+env:
+  CI: 1
+
 jobs:
   integrate:
     runs-on: ubuntu-latest

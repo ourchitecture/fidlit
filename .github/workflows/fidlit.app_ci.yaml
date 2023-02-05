@@ -17,7 +17,7 @@ on:
 
 # place "magic strings" used in the workflow here for convenient maintenance
 env:
-  CI: true
+  CI: 1
   NG_CLI_ANALYTICS: ci
   YARN_CACHE_NAME: "yarn"
   YARN_CACHE_PATH: "./**/yarn.lock"

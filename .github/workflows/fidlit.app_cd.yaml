@@ -7,7 +7,7 @@ name: fidlit.app_cd
 
 # place "magic strings" used in the workflow here for convenient maintenance
 env:
-  CI: true
+  CI: 1
   NG_CLI_ANALYTICS: ci
   MAIN_BRANCH_REF: "refs/heads/main"
   PUSH_EVENT: "push"
