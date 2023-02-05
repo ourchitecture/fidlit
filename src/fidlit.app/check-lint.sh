@@ -17,7 +17,11 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
     rm -rf ./.angular/
   fi
 
-  tag_name="${TAG_NAME:-localhost/fidlit/node:latest}"
+  if [ x"${LOCAL_CONTAINERS}" = "x" ]; then
+    tag_name="${TAG_NAME:-ghcr.io/ourchitecture/fidlit/node:latest}"
+  else
+    tag_name="${TAG_NAME:-localhost/fidlit/node:latest}"
+  fi
 
   containerRunEntrypointCommandOnVolume \
     $tool \

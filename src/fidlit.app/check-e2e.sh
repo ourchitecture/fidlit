@@ -17,7 +17,11 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
     rm -rf ./.angular/
   fi
 
-  tag_name="${TAG_NAME:-localhost/fidlit/node-cypress-chrome:latest}"
+  if [ x"${LOCAL_CONTAINERS}" = "x" ]; then
+    tag_name="${TAG_NAME:-ghcr.io/ourchitecture/fidlit/node-cypress-chrome:latest}"
+  else
+    tag_name="${TAG_NAME:-localhost/fidlit/node-cypress-chrome:latest}"
+  fi
 
   containerRunEntrypointCommandOnVolume \
     $tool \
