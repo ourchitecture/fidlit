@@ -6,7 +6,7 @@ site_path=./src/fidlit.app/
 # NOTE: Do not defer to project `all` since `install`
 #       is a little different in the root.
 .PHONY: all
-all: capability-models init check install
+all: init check install
 
 .PHONY: init
 init:
