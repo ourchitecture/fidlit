@@ -27,12 +27,18 @@ update:
 	@cd $(site_path) \
 	&& "$(MAKE)" $@
 
+.PHONY: fidlit-app
+fidlit-app:
+	@cd $(site_path) \
+	&& "$(MAKE)" all
+	@echo 'Recreating the ./docs/ distribution...' \
+	&& rm -rf ./docs/ \
+	&& mkdir ./docs/ \
+	&& cp -r $(site_path)dist/ .docs/ \
+	&& echo 'Successfully recreated the ./docs/ distribution.'
+
 .PHONY: install
-install:
-	@rm -rf ./docs/ \
-	&& cd $(site_path) \
-	&& "$(MAKE)" $@ \
-	&& cp -r ./dist/ ../../docs/
+install: fidlit-app
 
 .PHONY: search-index
 search-index:
