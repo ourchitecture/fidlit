@@ -14,7 +14,7 @@ if [ "$tool" != "docker" ]; then
   fi
 fi
 
-if [ x"${IN_CONTAINER}" == "x" ]; then
+if [ x"${IN_CONTAINER}" = "x" ]; then
   if ! command -v ${tool} >/dev/null 2>&1; then
     echo "The CLI for ${tool} commands could not be found and must be installed." 1>&2
     exit 1

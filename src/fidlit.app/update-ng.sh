@@ -9,7 +9,7 @@ tool="${FIDLIT_TOOL:-podman}"
 
 checkToolSupported $tool
 
-if [ x"${IN_CONTAINER}" == "x" ]; then
+if [ x"${IN_CONTAINER}" = "x" ]; then
   checkContainersInstalled $tool
 
   tag_name="${TAG_NAME:-localhost/fidlit/node:latest}"
