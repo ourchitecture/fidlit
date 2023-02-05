@@ -23,8 +23,6 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
   ${tool} run \
     --name "fidlit-capability-models" \
     --rm \
-    --interactive \
-    --tty \
     --entrypoint "/bin/ash" \
     --env IN_CONTAINER=1 \
     --env CI=1 \
