@@ -9,6 +9,7 @@ tool="${FIDLIT_TOOL:-podman}"
 
 checkToolSupported $tool
 
+# if not in a container...
 if [ x"${IN_CONTAINER}" = "x" ]; then
   checkContainersInstalled $tool
 
@@ -30,6 +31,8 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
     "/bin/ash" \
     "./check-lint.sh" \
     "$(pwd)"
+
+# if in a container...
 else
   checkYarnInstalled
   checkNodeDependenciesDirectory
