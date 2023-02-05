@@ -3,7 +3,7 @@
 # 2. If a PR to main, creates a PR containing the "./docs" output
 # 3. Skips building that same PR again when pushed back to "main".
 ################################################################################
-name: continuous-integration
+name: fidlit.app_cd
 
 # place "magic strings" used in the workflow here for convenient maintenance
 env:
@@ -23,11 +23,17 @@ env:
   OUR_SKIP_CI: "[skip ci]"
   OUR_CREATE_PR: "ourchitecture/create-pull-request/patch"
 
-# Trigger the workflow on push or pull request.
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+    paths:
+      # run this build when this file changes
+      - ".github/workflows/fidlit.app_cd.yml"
+      # run this build when the source code changes
+      - "src/fidlit.app/**"
 
 jobs:
-  integration:
+  deploy:
     # Do not run on forks.
     # Do not re-run a push from "create-pull-request" action.
     # NOTE: Cannot use `env`: https://github.com/actions/runner/issues/1189#issuecomment-880110759
