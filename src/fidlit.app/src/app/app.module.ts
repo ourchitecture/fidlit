@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,14 +11,17 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AvatarIconComponent } from './components/icons/avatar/avatar.component';
 import { LogoComponent } from './components/icons/logo/logo.component';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    AvatarIconComponent,
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     LogoComponent,

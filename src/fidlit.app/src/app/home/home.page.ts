@@ -2,8 +2,14 @@ import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
+import { RangeCustomEvent } from '@ionic/angular';
+
 import * as generate from 'project-name-generator';
 
+import {
+  OrganizationTimeService,
+  OrganizationTimeAge,
+} from '../services/organization-time.service';
 import { StorageService } from '../services/storage.service';
 
 @Component({
@@ -22,6 +28,21 @@ export class HomePage implements OnInit {
     subHeader: "Select the organization's industry",
   };
   isMissionVisionHelpVisible = false;
+
+  organizationSpeedMultiplier = 0;
+
+  organizationAge: OrganizationTimeAge = {
+    total: {
+      milliseconds: 0,
+    },
+    parts: {
+      years: 0,
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    },
+  };
 
   private organizationSuffixes = [
     'LLC',
@@ -259,9 +280,31 @@ export class HomePage implements OnInit {
     },
   ];
 
-  constructor(private storage: StorageService, private http: HttpClient) {}
+  constructor(
+    private storage: StorageService,
+    private http: HttpClient,
+    private organizationTimeService: OrganizationTimeService
+  ) {}
 
   async ngOnInit(): Promise<void> {
+    this.organizationTimeService.onAgeUpdated.subscribe((age) => {
+      console.debug('HomePage: organizationTimeService.onAgeUpdated()');
+      this.organizationAge = age;
+    });
+
+    this.organizationTimeService.onSpeedMultiplierUpdated.subscribe(
+      (multiplier) => {
+        console.debug(
+          'HomePage: organizationTimeService.onSpeedMultiplierUpdated()'
+        );
+        this.organizationSpeedMultiplier = multiplier;
+      }
+    );
+
+    this.organizationTimeService.initialize();
+
+    // this.organizationTimeService.play();
+
     const url = '/api/examples/industries/all.json';
 
     this.http.get(url).subscribe((response: any) => {
@@ -274,6 +317,31 @@ export class HomePage implements OnInit {
     await this.storage.initialize();
 
     this.reloadCompanyName();
+  }
+
+  playOrganizationTime() {
+    console.debug('HomePage: playOrganizationTime()');
+    this.organizationTimeService.play();
+  }
+
+  pauseOrganizationTime() {
+    console.debug('HomePage: pauseOrganizationTime()');
+    this.organizationTimeService.pause();
+  }
+
+  resetOrganizationTime() {
+    console.debug('HomePage: resetOrganizationTime()');
+    this.organizationTimeService.reset();
+  }
+
+  setOrganizationTimeSpeedMultiplier(ev: Event) {
+    console.debug('HomePage: setOrganizationTimeSpeedMultiplier()');
+
+    const multiplier = (
+      ev as RangeCustomEvent
+    ).detail.value.valueOf() as number;
+
+    this.organizationTimeService.updateSpeedMultiplier(multiplier);
   }
 
   async reloadCompanyName() {

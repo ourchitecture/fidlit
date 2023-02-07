@@ -20,8 +20,18 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
     tag_name="${TAG_NAME:-localhost/fidlit/node:latest}"
   fi
 
+  container_name="fidlit-app-dev"
+
+  if [ "$(${tool} ps --all --quiet --filter name=${container_name})" ]; then
+    echo 'Removing existing container...'
+    ${tool} rm \
+      ${container_name} \
+      --force
+    echo 'Successfully removed existing container.'
+  fi
+
   ${tool} run \
-    --name "fidlit-app-dev" \
+    --name "${container_name}" \
     --rm \
     --interactive \
     --tty \
@@ -41,7 +51,14 @@ else
   # BUG: A container may not use `--watch` correctly on a volume due to
   #      insufficient file permissions. Therefore, `--poll` is used to
   #      ensure changes are picked up in a timely manner.
+  echo ''
+  echo 'IGNORE: You may safely ignore the error "Warning: Running a'
+  echo '        server with --disable-host-check is a security risk."'
+  echo '        This is used intentionally inside of a container.'
+  echo ''
   yarn start \
     --port ${port_app} \
+    --host 0.0.0.0 \
+    --disable-host-check \
     --poll 1000
 fi
