@@ -1,3 +1,6 @@
+port_app:=4200
+port_host:=4200
+
 .DEFAULT_GOAL:=all
 
 # NOTE: Do not defer to project `all` since `install`
@@ -30,7 +33,9 @@ install:
 
 .PHONY: dev
 dev:
-	@./dev.sh
+	@PORT_APP=$(port_app) \
+	PORT_HOST=$(port_host) \
+	./dev.sh
 
 .PHONY: start
 start: dev
