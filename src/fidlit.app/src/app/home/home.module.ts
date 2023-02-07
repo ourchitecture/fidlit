@@ -13,10 +13,12 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 
+import { AvatarIconComponent } from '../components/icons/avatar/avatar.component';
 import { LogoComponent } from '../components/icons/logo/logo.component';
 
 @NgModule({
   imports: [
+    AvatarIconComponent,
     CommonModule,
     FormsModule,
     HomePageRoutingModule,
