@@ -109,11 +109,36 @@
       </ion-row>
       <ion-row>
         <ion-col size="3">
-          <ion-button (click)="playOrganizationTime()">Play</ion-button>
-          <ion-button (click)="pauseOrganizationTime()">Pause</ion-button>
-          <ion-button (click)="resetOrganizationTime()">Reset</ion-button>
+          <ion-button
+            (click)="playOrganizationTime()"
+            [disabled]="isOrganizationAgeRunning"
+            >Play</ion-button
+          >
+          <ion-button
+            (click)="pauseOrganizationTime()"
+            [disabled]="!isOrganizationAgeRunning"
+            >Pause</ion-button
+          >
+          <ion-button
+            (click)="resetOrganizationTime()"
+            [disabled]="!isOrganizationAgeRunning"
+            >Reset</ion-button
+          >
         </ion-col>
         <ion-col size="9">
+          <ion-select (ionChange)="setOrganizationTimeSpeedMultiplier2($event)">
+            <ion-select-option [value]="1">Normal</ion-select-option>
+            <ion-select-option [value]="2">2x</ion-select-option>
+            <ion-select-option [value]="86400"
+              >1 day = 1 second</ion-select-option
+            >
+            <ion-select-option [value]="604800"
+              >1 week = 1 second</ion-select-option
+            >
+            <ion-select-option [value]="2628000"
+              >1 month = 1 second</ion-select-option
+            >
+          </ion-select>
           <ion-range
             [value]="this.organizationSpeedMultiplier"
             [min]="1"

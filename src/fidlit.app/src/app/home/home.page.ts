@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
-import { RangeCustomEvent } from '@ionic/angular';
+import { SelectCustomEvent, RangeCustomEvent } from '@ionic/angular';
 
 import * as generate from 'project-name-generator';
 
@@ -43,6 +43,8 @@ export class HomePage implements OnInit {
       seconds: 0,
     },
   };
+
+  isOrganizationAgeRunning = false;
 
   private organizationSuffixes = [
     'LLC',
@@ -288,15 +290,15 @@ export class HomePage implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.organizationTimeService.onAgeUpdated.subscribe((age) => {
-      console.debug('HomePage: organizationTimeService.onAgeUpdated()');
+      // console.debug('HomePage: organizationTimeService.onAgeUpdated()');
       this.organizationAge = age;
     });
 
     this.organizationTimeService.onSpeedMultiplierUpdated.subscribe(
       (multiplier) => {
-        console.debug(
-          'HomePage: organizationTimeService.onSpeedMultiplierUpdated()'
-        );
+        // console.debug(
+        //   'HomePage: organizationTimeService.onSpeedMultiplierUpdated()'
+        // );
         this.organizationSpeedMultiplier = multiplier;
       }
     );
@@ -320,22 +322,25 @@ export class HomePage implements OnInit {
   }
 
   playOrganizationTime() {
-    console.debug('HomePage: playOrganizationTime()');
+    // console.debug('HomePage: playOrganizationTime()');
     this.organizationTimeService.play();
+    this.isOrganizationAgeRunning = true;
   }
 
   pauseOrganizationTime() {
-    console.debug('HomePage: pauseOrganizationTime()');
+    // console.debug('HomePage: pauseOrganizationTime()');
     this.organizationTimeService.pause();
+    this.isOrganizationAgeRunning = false;
   }
 
   resetOrganizationTime() {
-    console.debug('HomePage: resetOrganizationTime()');
+    // console.debug('HomePage: resetOrganizationTime()');
     this.organizationTimeService.reset();
+    this.isOrganizationAgeRunning = false;
   }
 
   setOrganizationTimeSpeedMultiplier(ev: Event) {
-    console.debug('HomePage: setOrganizationTimeSpeedMultiplier()');
+    // console.debug('HomePage: setOrganizationTimeSpeedMultiplier()');
 
     const multiplier = (
       ev as RangeCustomEvent
@@ -344,20 +349,112 @@ export class HomePage implements OnInit {
     this.organizationTimeService.updateSpeedMultiplier(multiplier);
   }
 
+  setOrganizationTimeSpeedMultiplier2(ev: Event) {
+    const multiplier = (ev as SelectCustomEvent).detail.value as number;
+
+    console.debug('setOrganizationTimeSpeedMultiplier2', multiplier);
+
+    this.organizationTimeService.updateSpeedMultiplier(multiplier);
+  }
+
+  private getRandomCompanyName(suffix: string): string {
+    const companyName = (
+      generate()
+        .spaced.split(' ')
+        .map((word) => word[0].toLocaleUpperCase() + word.substring(1))
+        .join(' ') +
+      ' ' +
+      suffix
+    ).trim();
+
+    const lowerCaseCompanyName = companyName.toLocaleLowerCase();
+
+    // Use a trailing ' ' space to ensure short words aren't a partial match.
+    const wordsToAvoid = [
+      'angry',
+      'annoy',
+      'annoyed',
+      'armed',
+      'arrogant',
+      'ashamed',
+      'auspicious',
+      'bad ',
+      'belligerent',
+      'confused',
+      'cumbersome',
+      'damaged',
+      'damaging',
+      'defeated',
+      'delirious',
+      'demonic',
+      'deranged',
+      'dirty',
+      'disturbed',
+      'evasive',
+      'fake',
+      'false',
+      'faulty',
+      'fretful',
+      'fright',
+      'glib',
+      'grouchy',
+      'grumpy',
+      'heartbreaking',
+      'horrible',
+      'irritating',
+      'jaded',
+      'jealous',
+      'lacking',
+      'lame',
+      'lousy',
+      'moaning',
+      'painful',
+      'paltry',
+      'placid',
+      'punishment',
+      'raspy',
+      'slave',
+      'smelly',
+      'spurious',
+      'stinky',
+      'sulky',
+      'temper',
+      'terrible',
+      'thoughtless',
+      'truculent',
+      'unbecoming',
+      'unsuitable',
+      'wasteful',
+      'worried',
+      'wrong',
+    ];
+
+    // console.debug('sorted words to avoid', wordsToAvoid.sort().join("',\n'"));
+
+    const companyNameHasWordToAvoid =
+      wordsToAvoid.filter(
+        (wordToAvoid) => lowerCaseCompanyName.indexOf(wordToAvoid) >= 0
+      ).length > 0;
+
+    // get another company name if it contains words to avoid
+    if (companyNameHasWordToAvoid) {
+      console.warn(
+        'Random company name had a word to avoid. Creating a new one...',
+        companyName
+      );
+      return this.getRandomCompanyName(suffix);
+    }
+
+    return companyName;
+  }
+
   async reloadCompanyName() {
     const randomSuffix =
       this.organizationSuffixes[
         Math.floor(Math.random() * this.organizationSuffixes.length)
       ];
 
-    this.companyName = (
-      generate()
-        .spaced.split(' ')
-        .map((word) => word[0].toLocaleUpperCase() + word.substring(1))
-        .join(' ') +
-      ' ' +
-      randomSuffix
-    ).trim();
+    this.companyName = this.getRandomCompanyName(randomSuffix);
 
     await this.storage.set('company-name', this.companyName);
 
