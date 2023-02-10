@@ -29,7 +29,7 @@ export class HomePage implements OnInit {
   };
   isMissionVisionHelpVisible = false;
 
-  organizationSpeedMultiplier = 0;
+  organizationSpeedMultiplier = 1;
 
   organizationAge: OrganizationTimeAge = {
     total: {
@@ -340,19 +340,9 @@ export class HomePage implements OnInit {
   }
 
   setOrganizationTimeSpeedMultiplier(ev: Event) {
-    // console.debug('HomePage: setOrganizationTimeSpeedMultiplier()');
-
-    const multiplier = (
-      ev as RangeCustomEvent
-    ).detail.value.valueOf() as number;
-
-    this.organizationTimeService.updateSpeedMultiplier(multiplier);
-  }
-
-  setOrganizationTimeSpeedMultiplier2(ev: Event) {
     const multiplier = (ev as SelectCustomEvent).detail.value as number;
 
-    console.debug('setOrganizationTimeSpeedMultiplier2', multiplier);
+    // console.debug('setOrganizationTimeSpeedMultiplier', multiplier);
 
     this.organizationTimeService.updateSpeedMultiplier(multiplier);
   }
@@ -427,6 +417,7 @@ export class HomePage implements OnInit {
       'wasteful',
       'worried',
       'wrong',
+      'throat',
     ];
 
     // console.debug('sorted words to avoid', wordsToAvoid.sort().join("',\n'"));

@@ -28,6 +28,8 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
 else
   checkYarnInstalled
 
+  yarn ng update --help
+
 	yarn ng update \
     @angular/common@^15 \
     @angular/core@^15 \
@@ -44,6 +46,5 @@ else
     @angular/cli@^15 \
     @angular/compiler@^15 \
     @angular/compiler-cli@^15 \
-    @angular/language-service@^15 \
-    --create-commits
+    @angular/language-service@^15
 fi
