@@ -48,12 +48,12 @@ export class OrganizationTimeService {
 
   private organizationTime: OrganizationTime = {
     interval: {
-      durationMs: 800,
+      durationMs: 1000,
       createdOn: new Date(),
       lastUpdatedOn: new Date(),
     },
     speed: {
-      multiplier: 100000.0,
+      multiplier: 86400.0, // 1 day = 1 second
     },
     createdOn: new Date(),
     age: {
@@ -73,7 +73,7 @@ export class OrganizationTimeService {
   private intervalId: number = 0;
 
   public updateSpeedMultiplier(multiplier: number) {
-    console.debug('OrganizationTimeService: updateSpeedMultiplier()');
+    // console.debug('OrganizationTimeService: updateSpeedMultiplier()');
 
     this.organizationTime.speed.multiplier = multiplier;
 
@@ -81,7 +81,7 @@ export class OrganizationTimeService {
   }
 
   public initialize() {
-    console.debug('OrganizationTimeService: initialize()');
+    // console.debug('OrganizationTimeService: initialize()');
 
     this.reset();
 
@@ -93,7 +93,7 @@ export class OrganizationTimeService {
     // skip if already playing (interval is already set)
     if (this.intervalId !== 0) return;
 
-    console.debug('OrganizationTimeService: play()');
+    // console.debug('OrganizationTimeService: play()');
 
     // reset dates
     this.organizationTime.interval.createdOn = new Date();
@@ -122,7 +122,7 @@ export class OrganizationTimeService {
   }
 
   public reset() {
-    console.debug('OrganizationTimeService: reset()');
+    // console.debug('OrganizationTimeService: reset()');
 
     // make sure time is not running
     this.pause();
@@ -132,7 +132,7 @@ export class OrganizationTimeService {
     this.organizationTime.age.total.milliseconds = 0;
 
     // reset interval
-    this.organizationTime.interval.durationMs = 800;
+    this.organizationTime.interval.durationMs = 1000;
     this.organizationTime.interval.createdOn = this.organizationTime.createdOn;
     this.organizationTime.interval.lastUpdatedOn =
       this.organizationTime.interval.createdOn;
@@ -142,7 +142,7 @@ export class OrganizationTimeService {
   }
 
   private measure() {
-    console.debug('OrganizationTimeService: measure()');
+    // console.debug('OrganizationTimeService: measure()');
 
     const currentMeasurementTime = new Date();
 
@@ -158,6 +158,12 @@ export class OrganizationTimeService {
     // adjust the time passed by the organizational speed factor
     const adjustedEllapsedMs =
       ellapsedMs * this.organizationTime.speed.multiplier;
+
+    console.debug(
+      'age speed multiplier (actual, adjusted)',
+      ellapsedMs,
+      adjustedEllapsedMs
+    );
 
     // increase the age of the organization by the adjusted time interval
     this.organizationTime.age.total.milliseconds += adjustedEllapsedMs;

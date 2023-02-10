@@ -22,109 +22,75 @@
   </ion-header>
 
   <div id="container">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="1">
-          <ion-icon name="timer-outline"></ion-icon>
-        </ion-col>
-        <ion-col size="11">
-          <ion-label>Organization Age</ion-label>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="1">
-          <div class="ion-text-right">
-            <ion-text
-              >{{this.organizationAge.parts.years | number: '1.0-0'}}</ion-text
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title
+          ><ion-icon name="timer-outline"></ion-icon> Organization
+          Age</ion-card-title
+        >
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-text>
+              {{this.organizationAge.parts.years | number: '1.0-0'}} fiscal
+              year{{this.organizationAge.parts.years === 1 ? '' : 's'}},
+              {{this.organizationAge.parts.days | number: '1.0-0'}}
+              day{{this.organizationAge.parts.days === 1 ? '' : 's'}}
+              {{this.organizationAge.parts.hours < 10 ? '0' :
+              ''}}{{this.organizationAge.parts.hours | number:
+              '1.0-0'}}:{{this.organizationAge.parts.minutes < 10 ? '0' :
+              ''}}{{this.organizationAge.parts.minutes | number:
+              '1.0-0'}}:{{this.organizationAge.parts.seconds < 10 ? '0' :
+              ''}}{{this.organizationAge.parts.seconds | number: '1.0-0'}}
+            </ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Aging Speed</ion-label>
+            <ion-select
+              interface="popover"
+              [value]="organizationSpeedMultiplier"
+              (ionChange)="setOrganizationTimeSpeedMultiplier($event)"
             >
-          </div>
-        </ion-col>
-        <ion-col size="11">
-          <ion-label
-            >fiscal year{{this.organizationAge.parts.years === 1 ? '' :
-            's'}}</ion-label
-          >
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="1">
-          <div class="ion-text-right">
-            <ion-text
-              >{{this.organizationAge.parts.days | number: '1.0-0'}}</ion-text
-            >
-          </div>
-        </ion-col>
-        <ion-col size="11">
-          <ion-label
-            >day{{this.organizationAge.parts.days === 1 ? '' : 's'}}</ion-label
-          >
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="1">
-          <div class="ion-text-right">
-            <ion-text
-              >{{this.organizationAge.parts.hours | number: '1.0-0'}}</ion-text
-            >
-          </div>
-        </ion-col>
-        <ion-col size="11">
-          <ion-label
-            >hour{{this.organizationAge.parts.hours === 1 ? '' :
-            's'}}</ion-label
-          >
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="1">
-          <div class="ion-text-right">
-            <ion-text
-              >{{this.organizationAge.parts.minutes | number:
-              '1.0-0'}}</ion-text
-            >
-          </div>
-        </ion-col>
-        <ion-col size="11">
-          <ion-label
-            >minute{{this.organizationAge.parts.minutes === 1 ? '' :
-            's'}}</ion-label
-          >
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="1">
-          <div class="ion-text-right">
-            <ion-text
-              >{{this.organizationAge.parts.seconds | number:
-              '1.0-0'}}</ion-text
-            >
-          </div>
-        </ion-col>
-        <ion-col size="11">
-          <ion-label
-            >second{{this.organizationAge.parts.seconds === 1 ? '' :
-            's'}}</ion-label
-          >
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="3">
-          <ion-button (click)="playOrganizationTime()">Play</ion-button>
-          <ion-button (click)="pauseOrganizationTime()">Pause</ion-button>
-          <ion-button (click)="resetOrganizationTime()">Reset</ion-button>
-        </ion-col>
-        <ion-col size="9">
-          <ion-range
-            [value]="this.organizationSpeedMultiplier"
-            [min]="1"
-            [max]="10000000"
-            [pin]="true"
-            [ticks]="true"
-            (ionChange)="setOrganizationTimeSpeedMultiplier($event)"
-          ></ion-range>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+              <ion-select-option [value]="1">Normal</ion-select-option>
+              <ion-select-option [value]="2">2x</ion-select-option>
+              <ion-select-option [value]="5">5x</ion-select-option>
+              <ion-select-option [value]="10">10x</ion-select-option>
+              <ion-select-option [value]="3600"
+                >1 hour = 1 second</ion-select-option
+              >
+              <ion-select-option [value]="86400"
+                >1 day = 1 second</ion-select-option
+              >
+              <ion-select-option [value]="604800"
+                >1 week = 1 second</ion-select-option
+              >
+              <ion-select-option [value]="2628000"
+                >1 month = 1 second</ion-select-option
+              >
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+      <ion-button
+        fill="clear"
+        (click)="playOrganizationTime()"
+        [disabled]="isOrganizationAgeRunning"
+        >Play</ion-button
+      >
+      <ion-button
+        fill="clear"
+        (click)="pauseOrganizationTime()"
+        [disabled]="!isOrganizationAgeRunning"
+        >Pause</ion-button
+      >
+      <ion-button
+        fill="clear"
+        (click)="resetOrganizationTime()"
+        [disabled]="!isOrganizationAgeRunning"
+        >Reset</ion-button
+      >
+    </ion-card>
 
     <ion-card>
       <ion-card-content>
