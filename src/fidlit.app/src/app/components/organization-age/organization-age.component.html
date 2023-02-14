@@ -1,0 +1,69 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title
+      ><ion-icon name="timer-outline"></ion-icon> Organization
+      Age</ion-card-title
+    >
+  </ion-card-header>
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-text>
+          {{ this.organizationAge.parts.years | number : "1.0-0" }} fiscal
+          year{{ this.organizationAge.parts.years === 1 ? "" : "s" }},
+          {{ this.organizationAge.parts.days | number : "1.0-0" }}
+          day{{ this.organizationAge.parts.days === 1 ? "" : "s" }}
+          {{ this.organizationAge.parts.hours < 10 ? "0" : ""
+          }}{{ this.organizationAge.parts.hours | number : "1.0-0" }}:{{
+            this.organizationAge.parts.minutes < 10 ? "0" : ""
+          }}{{ this.organizationAge.parts.minutes | number : "1.0-0" }}:{{
+            this.organizationAge.parts.seconds < 10 ? "0" : ""
+          }}{{ this.organizationAge.parts.seconds | number : "1.0-0" }}
+        </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Aging Speed</ion-label>
+        <ion-select
+          interface="popover"
+          [value]="organizationSpeedMultiplier"
+          (ionChange)="setOrganizationTimeSpeedMultiplier($event)"
+        >
+          <ion-select-option [value]="1">Normal</ion-select-option>
+          <ion-select-option [value]="2">2x</ion-select-option>
+          <ion-select-option [value]="5">5x</ion-select-option>
+          <ion-select-option [value]="10">10x</ion-select-option>
+          <ion-select-option [value]="3600"
+            >1 hour = 1 second</ion-select-option
+          >
+          <ion-select-option [value]="86400"
+            >1 day = 1 second</ion-select-option
+          >
+          <ion-select-option [value]="604800"
+            >1 week = 1 second</ion-select-option
+          >
+          <ion-select-option [value]="2628000"
+            >1 month = 1 second</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+  <ion-button
+    fill="clear"
+    (click)="playOrganizationTime()"
+    [disabled]="isOrganizationAgeRunning"
+    >Play</ion-button
+  >
+  <ion-button
+    fill="clear"
+    (click)="pauseOrganizationTime()"
+    [disabled]="!isOrganizationAgeRunning"
+    >Pause</ion-button
+  >
+  <ion-button
+    fill="clear"
+    (click)="resetOrganizationTime()"
+    [disabled]="!isOrganizationAgeRunning"
+    >Reset</ion-button
+  >
+</ion-card>

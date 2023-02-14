@@ -15,6 +15,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { AvatarIconComponent } from '../components/icons/avatar/avatar.component';
 import { LogoComponent } from '../components/icons/logo/logo.component';
+import { OrganizationAgeComponent } from '../components/organization-age/organization-age.component';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { LogoComponent } from '../components/icons/logo/logo.component';
     MatButtonModule,
     MatIconModule,
     MatTreeModule,
+    OrganizationAgeComponent,
   ],
   declarations: [HomePage],
 })
