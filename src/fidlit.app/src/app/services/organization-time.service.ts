@@ -46,6 +46,10 @@ export class OrganizationTimeService {
   onAgeUpdated = new EventEmitter<OrganizationTimeAge>();
   onSpeedMultiplierUpdated = new EventEmitter<number>();
 
+  onPlay = new EventEmitter<OrganizationTimeAge>();
+  onPause = new EventEmitter<OrganizationTimeAge>();
+  onReset = new EventEmitter<OrganizationTimeAge>();
+
   private organizationTime: OrganizationTime = {
     interval: {
       durationMs: 1000,
@@ -101,6 +105,8 @@ export class OrganizationTimeService {
 
     this.measure();
 
+    this.onPlay.emit(this.organizationTime.age);
+
     this.intervalId = window.setInterval(
       () => {
         this.measure();
@@ -119,6 +125,8 @@ export class OrganizationTimeService {
     this.intervalId = 0;
 
     this.measure();
+
+    this.onPause.emit(this.organizationTime.age);
   }
 
   public reset() {
@@ -139,6 +147,8 @@ export class OrganizationTimeService {
 
     // reset measurements
     this.measure();
+
+    this.onReset.emit(this.organizationTime.age);
   }
 
   private measure() {

@@ -2,15 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
-import { SelectCustomEvent, RangeCustomEvent } from '@ionic/angular';
-
 import * as generate from 'project-name-generator';
 
-import {
-  OrganizationTimeService,
-  OrganizationTimeAge,
-} from '../services/organization-time.service';
 import { StorageService } from '../services/storage.service';
+
+import * as humanNames from 'human-names';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +14,16 @@ import { StorageService } from '../services/storage.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  avatarCode = '01-01';
+  name = '';
+
+  skills = {
+    people: 0,
+    product: 0,
+    process: 0,
+    technology: 0,
+  };
+
   companyName = '';
   missionStatement = '';
   visionStatement = '';
@@ -28,23 +34,6 @@ export class HomePage implements OnInit {
     subHeader: "Select the organization's industry",
   };
   isMissionVisionHelpVisible = false;
-
-  organizationSpeedMultiplier = 1;
-
-  organizationAge: OrganizationTimeAge = {
-    total: {
-      milliseconds: 0,
-    },
-    parts: {
-      years: 0,
-      days: 0,
-      hours: 0,
-      minutes: 0,
-      seconds: 0,
-    },
-  };
-
-  isOrganizationAgeRunning = false;
 
   private organizationSuffixes = [
     'LLC',
@@ -282,30 +271,37 @@ export class HomePage implements OnInit {
     },
   ];
 
-  constructor(
-    private storage: StorageService,
-    private http: HttpClient,
-    private organizationTimeService: OrganizationTimeService
-  ) {}
+  constructor(private storage: StorageService, private http: HttpClient) {}
 
   async ngOnInit(): Promise<void> {
-    this.organizationTimeService.onAgeUpdated.subscribe((age) => {
-      // console.debug('HomePage: organizationTimeService.onAgeUpdated()');
-      this.organizationAge = age;
-    });
+    const avatarCodes = [
+      ...this.range(37, 1).map(
+        (i) => '01-' + (i < 10 ? '0' : '') + i.toString()
+      ),
+      '01-39',
+      ...this.range(17, 1).map(
+        (i) => '02-' + (i < 10 ? '0' : '') + i.toString()
+      ),
+      ...this.range(37 - 19 + 1, 19).map(
+        (i) => '02-' + (i < 10 ? '0' : '') + i.toString()
+      ),
+      '02-39',
+    ];
 
-    this.organizationTimeService.onSpeedMultiplierUpdated.subscribe(
-      (multiplier) => {
-        // console.debug(
-        //   'HomePage: organizationTimeService.onSpeedMultiplierUpdated()'
-        // );
-        this.organizationSpeedMultiplier = multiplier;
-      }
-    );
+    this.avatarCode =
+      avatarCodes[Math.floor(Math.random() * avatarCodes.length)];
 
-    this.organizationTimeService.initialize();
+    // console.log('Avatar code', this.avatarCode);
 
-    // this.organizationTimeService.play();
+    this.name = `${humanNames.allRandom()} ${humanNames.allRandom()}`;
+
+    const oneToTen = this.range(10, 1);
+
+    this.skills.people = oneToTen[Math.floor(Math.random() * oneToTen.length)];
+    this.skills.product = oneToTen[Math.floor(Math.random() * oneToTen.length)];
+    this.skills.process = oneToTen[Math.floor(Math.random() * oneToTen.length)];
+    this.skills.technology =
+      oneToTen[Math.floor(Math.random() * oneToTen.length)];
 
     const url = '/api/examples/industries/all.json';
 
@@ -321,30 +317,8 @@ export class HomePage implements OnInit {
     this.reloadCompanyName();
   }
 
-  playOrganizationTime() {
-    // console.debug('HomePage: playOrganizationTime()');
-    this.organizationTimeService.play();
-    this.isOrganizationAgeRunning = true;
-  }
-
-  pauseOrganizationTime() {
-    // console.debug('HomePage: pauseOrganizationTime()');
-    this.organizationTimeService.pause();
-    this.isOrganizationAgeRunning = false;
-  }
-
-  resetOrganizationTime() {
-    // console.debug('HomePage: resetOrganizationTime()');
-    this.organizationTimeService.reset();
-    this.isOrganizationAgeRunning = false;
-  }
-
-  setOrganizationTimeSpeedMultiplier(ev: Event) {
-    const multiplier = (ev as SelectCustomEvent).detail.value as number;
-
-    // console.debug('setOrganizationTimeSpeedMultiplier', multiplier);
-
-    this.organizationTimeService.updateSpeedMultiplier(multiplier);
+  private range(size: number, startAt: number = 0): ReadonlyArray<number> {
+    return [...Array(size).keys()].map((i) => Number(i) + startAt);
   }
 
   private getRandomCompanyName(suffix: string): string {
