@@ -13,6 +13,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AvatarIconComponent } from './components/icons/avatar/avatar.component';
 import { LogoComponent } from './components/icons/logo/logo.component';
+import { LoremIpsumComponent } from './components/lorem-ipsum/lorem-ipsum.component';
+import { WindowRef } from './WindowRef';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +27,7 @@ import { LogoComponent } from './components/icons/logo/logo.component';
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     LogoComponent,
+    LoremIpsumComponent,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
@@ -32,7 +35,10 @@ import { LogoComponent } from './components/icons/logo/logo.component';
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    WindowRef,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,0 +1,67 @@
+<ion-header class="mobile" [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <a href="/">
+        <app-logo id="logo-icon"></app-logo>
+      </a>
+      Fidlit
+    </ion-title>
+    <ion-buttons [collapse]="true" slot="primary">
+      <ion-button routerLink="/updates">Updates</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header class="desktop" [attr.data-scrolly]="scrollY">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="3">
+          <ion-title>
+            <a href="/">
+              <app-logo id="logo-icon"></app-logo>
+            </a>
+            Fidlit
+          </ion-title>
+        </ion-col>
+        <ion-col size="6">
+          <div class="ion-text-center">
+            <ion-button routerLink="/" fill="clear" color="dark"
+              >Home</ion-button
+            >
+            <ion-button routerLink="/updates" fill="clear" color="dark"
+              >Updates</ion-button
+            >
+          </div>
+        </ion-col>
+        <ion-col size="3"> </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content
+  [fullscreen]="true"
+  [scrollEvents]="true"
+  (ionScroll)="onScroll($any($event))"
+>
+  <ion-header class="mobile" collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">
+        <a href="/">
+          <app-logo id="logo-icon"></app-logo>
+        </a>
+        Fidlit
+      </ion-title>
+      <ion-buttons [collapse]="true" slot="primary">
+        <ion-button routerLink="/updates">Updates</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <app-logo></app-logo>
+
+  <div id="lipsum" class="ion-padding">
+    <app-lorem-ipsum [paragraphCount]="10"></app-lorem-ipsum>
+  </div>
+</ion-content>
