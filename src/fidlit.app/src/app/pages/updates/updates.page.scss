@@ -1,0 +1,30 @@
+.mobile {
+  display: block;
+}
+
+.desktop {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .mobile {
+    display: none;
+  }
+
+  .desktop {
+    display: block;
+  }
+}
+
+ion-header::after {
+  visibility: hidden;
+  background-image: none;
+  transition-property: background-image;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+
+ion-header:not([data-scrolly="0"])::after {
+  visibility: visible;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAHBAMAAADzDtBxAAAAD1BMVEUAAAAAAAAAAAAAAAAAAABPDueNAAAABXRSTlMUCS0gBIh/TXEAAAAaSURBVAjXYxCEAgY4UIICBmMogMsgFLtAAQCNSwXZKOdPxgAAAABJRU5ErkJggg==);
+}
