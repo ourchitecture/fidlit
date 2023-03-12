@@ -1,29 +1,11 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      <a href="/">
-        <app-logo id="logo-icon"></app-logo>
-      </a>
-      Fidlit
-    </ion-title>
-    <ion-buttons [collapse]="true" slot="primary">
-      <ion-button routerLink="/updates">Updates</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+  <app-header></app-header>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header [translucent]="true" collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">
-        <a href="/">
-          <app-logo id="logo-icon"></app-logo>
-        </a>
-        Fidlit
-      </ion-title>
-      <ion-buttons [collapse]="true" slot="primary">
-        <ion-button routerLink="/updates">Updates</ion-button>
-      </ion-buttons>
+      <ion-title color="primary" size="large">Fidlit</ion-title>
     </ion-toolbar>
   </ion-header>
 

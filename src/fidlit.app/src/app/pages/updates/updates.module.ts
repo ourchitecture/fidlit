@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { LogoComponent } from '../../components/icons/logo/logo.component';
 import { LoremIpsumComponent } from '../../components/lorem-ipsum/lorem-ipsum.component';
+import { HeaderComponent } from '../../components/pages/header/header.component';
 
 import { UpdatesPageRoutingModule } from './updates-routing.module';
 
@@ -15,6 +16,7 @@ import { UpdatesPage } from './updates.page';
   imports: [
     CommonModule,
     FormsModule,
+    HeaderComponent,
     IonicModule,
     LogoComponent,
     LoremIpsumComponent,

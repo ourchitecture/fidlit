@@ -7,7 +7,9 @@
   "homepage": "https://fidlit.app/",
   "license": "AGPL-3.0-only",
   "scripts": {
+    "ionic": "ionic",
     "ng": "ng",
+    "cypress": "cypress",
     "start": "ng serve",
     "dev": "ng serve",
     "build": "ng build --configuration=production",
