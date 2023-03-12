@@ -16,12 +16,14 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { AvatarIconComponent } from '../components/icons/avatar/avatar.component';
 import { LogoComponent } from '../components/icons/logo/logo.component';
 import { OrganizationAgeComponent } from '../components/organization-age/organization-age.component';
+import { HeaderComponent } from '../components/pages/header/header.component';
 
 @NgModule({
   imports: [
     AvatarIconComponent,
     CommonModule,
     FormsModule,
+    HeaderComponent,
     HomePageRoutingModule,
     HttpClientModule,
     IonicModule,

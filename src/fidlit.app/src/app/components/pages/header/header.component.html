@@ -1,0 +1,19 @@
+<ion-toolbar>
+  <ion-title>
+    <ion-button fill="clear" routerLink="/">
+      <app-logo id="logo-icon"></app-logo>
+      <ion-text>Fidlit</ion-text>
+    </ion-button>
+  </ion-title>
+  <ion-buttons [collapse]="true" slot="primary">
+    <ion-button routerLink="/updates">Updates</ion-button>
+    <ion-button
+      color="tertiary"
+      (click)="toggleDarkMode()"
+      title="Toggle display between light and dark mode"
+    >
+      <ion-icon name="contrast-outline" slot="start"></ion-icon>
+      <ion-text class="ion-hide-sm-down">Display Mode</ion-text>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>

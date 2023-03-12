@@ -14,6 +14,8 @@ import * as humanNames from 'human-names';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+  isDisplayDarkMode = true;
+
   avatarCode = '01-01';
   name = '';
 

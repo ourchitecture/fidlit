@@ -185,22 +185,29 @@ export class OrganizationTimeService {
       totalSeconds / SECONDS_IN_YEAR
     );
 
+    const secondsRemainingFromYear = totalSeconds % SECONDS_IN_YEAR;
+
     this.organizationTime.age.parts.days = Math.floor(
-      (totalSeconds % SECONDS_IN_YEAR) / SECONDS_IN_DAY
+      secondsRemainingFromYear / SECONDS_IN_DAY
     );
+
+    const secondsRemainingFromDays = secondsRemainingFromYear % SECONDS_IN_DAY;
 
     this.organizationTime.age.parts.hours = Math.floor(
-      ((totalSeconds % SECONDS_IN_YEAR) % SECONDS_IN_DAY) / SECONDS_IN_HOUR
+      secondsRemainingFromDays / SECONDS_IN_HOUR
     );
+
+    const secondsRemainingFromHours =
+      secondsRemainingFromDays % SECONDS_IN_HOUR;
 
     this.organizationTime.age.parts.minutes = Math.floor(
-      (((totalSeconds % SECONDS_IN_YEAR) % SECONDS_IN_DAY) % SECONDS_IN_HOUR) /
-        SECONDS_IN_MINUTE
+      secondsRemainingFromHours / SECONDS_IN_MINUTE
     );
 
-    this.organizationTime.age.parts.seconds =
-      (((totalSeconds % SECONDS_IN_YEAR) % SECONDS_IN_DAY) % SECONDS_IN_HOUR) %
-      SECONDS_IN_MINUTE;
+    const secondsRemainingFromMinutes =
+      secondsRemainingFromHours % SECONDS_IN_MINUTE;
+
+    this.organizationTime.age.parts.seconds = secondsRemainingFromMinutes;
 
     this.onAgeUpdated.emit(this.organizationTime.age);
   }
