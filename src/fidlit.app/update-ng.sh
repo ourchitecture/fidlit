@@ -31,9 +31,12 @@ else
   yarn ng update --help
 
 	yarn ng update \
+    @angular/animations@^15 \
+    @angular/cdk@^15 \
     @angular/common@^15 \
     @angular/core@^15 \
     @angular/forms@^15 \
+    @angular/material@^15 \
     @angular/platform-browser@^15 \
     @angular/platform-browser-dynamic@^15 \
     @angular/router@^15 \
