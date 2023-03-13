@@ -75,10 +75,15 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
-  /** custom **/
-  #logo-icon {
-    --logo-icon-size: 24px;
-  }
+  --fidlit-color-1: #2af295;
+  --fidlit-color-2: #009bfa;
+  --fidlit-color-3: #ed90f8;
+  --fidlit-color-4: #f2576c;
+  --fidlit-color-5: #f3d065;
+  --fidlit-color-6: #fa9d82;
+  --fidlit-color-7: #f2576c;
+
+  --fidlit-logo-icon-size: 24px;
 }
 
 // IMPORTANT: Do not use "prefers-color-scheme" here; toggle will not work.
