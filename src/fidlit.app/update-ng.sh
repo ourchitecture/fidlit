@@ -28,8 +28,6 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
 else
   checkYarnInstalled
 
-  yarn ng update --help
-
 	yarn ng update \
     @angular/animations@^15 \
     @angular/cdk@^15 \
