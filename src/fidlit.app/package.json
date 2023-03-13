@@ -45,6 +45,9 @@
     "tslib": "^2.5.0",
     "zone.js": "~0.13.0"
   },
+  "devDependenciesComments": {
+    "cypress": "Must match the version installed in published container from the local cypress container project"
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.2.2",
     "@angular-eslint/builder": "^15.2.1",
