@@ -1,0 +1,140 @@
+<ion-header [translucent]="true">
+  <app-header title="Theme Preview"></app-header>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header [translucent]="true" collapse="condense">
+    <app-ios-header title="Theme Preview"></app-ios-header>
+  </ion-header>
+
+  <ion-grid fixed>
+    <ion-segment value="default">
+      <ion-segment-button value="default">
+        <ion-label>Default</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="segment">
+        <ion-label>Segment</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-list>
+      <ion-item>
+        <ion-label>Unchecked Toggle</ion-label>
+        <ion-toggle [checked]="false"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Primary Toggle</ion-label>
+        <ion-toggle color="primary" [checked]="true"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Secondary Toggle</ion-label>
+        <ion-toggle color="secondary" [checked]="true"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tertiary Toggle</ion-label>
+        <ion-toggle color="tertiary" [checked]="true"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Success Toggle</ion-label>
+        <ion-toggle color="success" [checked]="true"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Warning Toggle</ion-label>
+        <ion-toggle color="warning" [checked]="true"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Danger Toggle</ion-label>
+        <ion-toggle color="danger" [checked]="true"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Light Toggle</ion-label>
+        <ion-toggle color="light" [checked]="true"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Medium Toggle</ion-label>
+        <ion-toggle color="medium" [checked]="true"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Dark Toggle</ion-label>
+        <ion-toggle color="dark" [checked]="true"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Disabled Toggle</ion-label>
+        <ion-toggle [disabled]="true" [checked]="true"></ion-toggle>
+      </ion-item>
+    </ion-list>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button color="primary" expand="block">Aa</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="secondary" expand="block">Aa</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button color="tertiary" expand="block">Aa</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-chip color="success">Success</ion-chip>
+        </ion-col>
+        <ion-col class="ion-text-center">
+          <ion-chip color="warning">Warning</ion-chip>
+        </ion-col>
+        <ion-col class="ion-text-center">
+          <ion-chip color="danger">Danger</ion-chip>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-list>
+      <ion-item>
+        <ion-icon name="star" color="primary" slot="start"></ion-icon>
+        <ion-text>Star</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="planet" color="secondary" slot="start"></ion-icon>
+        <ion-text>Planet</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="sunny" color="tertiary" slot="start"></ion-icon>
+        <ion-text>Sun</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="moon" color="success" slot="start"></ion-icon>
+        <ion-text>Moon</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="rocket" color="warning" slot="start"></ion-icon>
+        <ion-text>Rocket</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="earth" color="danger" slot="start"></ion-icon>
+        <ion-text>Earth</ion-text>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <app-lorem-ipsum [paragraphCount]="10"></app-lorem-ipsum>
+    </div>
+  </ion-grid>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="tertiary">
+      <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button>
+        <ion-icon name="document"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="color-palette"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="globe"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

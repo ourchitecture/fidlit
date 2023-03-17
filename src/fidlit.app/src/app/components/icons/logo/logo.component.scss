@@ -7,26 +7,26 @@ svg {
   max-height: var(--fidlit-logo-icon-size, 24px);
 
   .logo-f-top-left {
-    fill: var(--fidlit-color-1);
+    fill: var(--fidlit-logo-color-1);
   }
 
   .logo-f-middle-left {
-    fill: var(--fidlit-color-1);
+    fill: var(--fidlit-logo-color-1);
   }
 
   .logo-f-top {
-    fill: var(--fidlit-color-7);
+    fill: var(--fidlit-logo-color-4);
   }
 
   .logo-f-middle-right {
-    fill: var(--fidlit-color-7);
+    fill: var(--fidlit-logo-color-4);
   }
 
   .logo-f-middle {
-    fill: var(--fidlit-color-6);
+    fill: var(--fidlit-logo-color-6);
   }
 
   .logo-f-bottom {
-    fill: var(--fidlit-color-6);
+    fill: var(--fidlit-logo-color-6);
   }
 }

@@ -4,173 +4,184 @@
 
 <ion-content [fullscreen]="true">
   <ion-header [translucent]="true" collapse="condense">
-    <ion-toolbar>
-      <ion-title color="primary" size="large">Fidlit</ion-title>
-    </ion-toolbar>
+    <app-ios-header></app-ios-header>
   </ion-header>
 
-  <div id="container">
-    <ion-card>
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-avatar slot="start">
-              <img [src]="'assets/avatars/avatar-' + avatarCode + '.svg'" />
-            </ion-avatar>
-            <ion-label>Welcome {{name}}!</ion-label>
-          </ion-item>
-        </ion-list>
-        <ion-header>Assigned Skills</ion-header>
-        <ion-list inset>
-          <ion-item>
-            <ion-label>People</ion-label>
-            <ion-range [min]="1" [max]="10" [value]="skills.people"></ion-range>
-          </ion-item>
-          <ion-item>
-            <ion-label>Product</ion-label>
-            <ion-range
-              [min]="1"
-              [max]="10"
-              [value]="skills.product"
-            ></ion-range>
-          </ion-item>
-          <ion-item>
-            <ion-label>Process</ion-label>
-            <ion-range
-              [min]="1"
-              [max]="10"
-              [value]="skills.process"
-            ></ion-range>
-          </ion-item>
-          <ion-item>
-            <ion-label>Technology</ion-label>
-            <ion-range
-              [min]="1"
-              [max]="10"
-              [value]="skills.technology"
-            ></ion-range>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
+  <ion-grid fixed>
+    <div id="container">
+      <ion-card>
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-avatar slot="start">
+                <img [src]="'assets/avatars/avatar-' + avatarCode + '.svg'" />
+              </ion-avatar>
+              <ion-label>Welcome {{name}}!</ion-label>
+            </ion-item>
+          </ion-list>
+          <ion-header>Assigned Skills</ion-header>
+          <ion-list inset>
+            <ion-item>
+              <ion-label>People</ion-label>
+              <ion-range
+                [min]="1"
+                [max]="10"
+                [value]="skills.people"
+              ></ion-range>
+            </ion-item>
+            <ion-item>
+              <ion-label>Product</ion-label>
+              <ion-range
+                [min]="1"
+                [max]="10"
+                [value]="skills.product"
+              ></ion-range>
+            </ion-item>
+            <ion-item>
+              <ion-label>Process</ion-label>
+              <ion-range
+                [min]="1"
+                [max]="10"
+                [value]="skills.process"
+              ></ion-range>
+            </ion-item>
+            <ion-item>
+              <ion-label>Technology</ion-label>
+              <ion-range
+                [min]="1"
+                [max]="10"
+                [value]="skills.technology"
+              ></ion-range>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
 
-    <app-organization-age></app-organization-age>
+      <app-organization-age></app-organization-age>
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title> Organization </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list>
-          <ion-item>
-            <ion-label position="stacked">Title:</ion-label>
-            <ion-input
-              placeholder="The title of your organization"
-              [ngModel]="companyName"
-              required
-            ></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="stacked">Industry:</ion-label>
-            <ion-select
-              interface="action-sheet"
-              placeholder="Select an industry"
-              cancelText="Cancel industry selection"
-              [interfaceOptions]="industrySelectorOptions"
-              [(ngModel)]="selectedIndustry"
-            >
-              <ion-select-option *ngFor="let industry of industries; index as i"
-                >{{industry}}</ion-select-option
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title> Organization </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-label position="stacked">Title:</ion-label>
+              <ion-input
+                placeholder="The title of your organization"
+                [ngModel]="companyName"
+                required
+              ></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Industry:</ion-label>
+              <ion-select
+                interface="action-sheet"
+                placeholder="Select an industry"
+                cancelText="Cancel industry selection"
+                [interfaceOptions]="industrySelectorOptions"
+                [(ngModel)]="selectedIndustry"
               >
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-button
-              shape="round"
-              fill="clear"
-              slot="end"
-              color="medium"
-              (click)="toggleMissionVisionHelpDisplay(true)"
-            >
-              <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
-            </ion-button>
-            <ion-label position="stacked">Mission statement:</ion-label>
-            <ion-textarea
-              placeholder="The organizational mission statement"
-              [ngModel]="missionStatement"
-              autoGrow
-              required
-              spellcheck
-            ></ion-textarea>
-          </ion-item>
-          <ion-item>
-            <ion-button
-              shape="round"
-              fill="clear"
-              slot="end"
-              color="medium"
-              (click)="toggleMissionVisionHelpDisplay(true)"
-            >
-              <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
-            </ion-button>
-            <ion-label position="stacked">Vision statement:</ion-label>
-            <ion-textarea
-              placeholder="The organizational vision statement"
-              [ngModel]="visionStatement"
-              autoGrow
-              required
-              spellcheck
-            ></ion-textarea>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-      <ion-button fill="clear" (click)="reloadCompanyName()">
-        <ion-icon name="reload-outline" slot="start"></ion-icon>
-        Generate Random Fun
-      </ion-button>
-    </ion-card>
-  </div>
-  <ion-modal [isOpen]="isMissionVisionHelpVisible">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Mission vs. Vision</ion-title>
-          <ion-buttons slot="end">
-            <ion-button
-              (click)="toggleMissionVisionHelpDisplay(false)"
-              [strong]="true"
-              >Close</ion-button
-            >
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <p>
-          An organization's mission statement and a vision statement are both
-          important components of an organization's strategy and provide
-          direction for decision-making and goal-setting. However, they serve
-          different purposes and focus on different aspects of the
-          organization's future.
-        </p>
-        <p>
-          A mission statement defines the purpose and focus of an organization,
-          and outlines what the company does and why it exists. It provides a
-          framework for decision-making and guides the company's actions and
-          priorities.
-        </p>
-        <p>
-          A vision statement, on the other hand, is a more aspirational
-          statement that defines the organization's desired future state and
-          what it wants to achieve. It is a long-term view of what the company
-          wants to become and serves as a source of inspiration and motivation
-          for employees.
-        </p>
-        <p>
-          In summary, a mission statement answers the question "What do we do?"
-          while a vision statement answers the question "What do we want to
-          become?"
-        </p>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+                <ion-select-option
+                  *ngFor="let industry of industries; index as i"
+                  >{{industry}}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-button
+                shape="round"
+                fill="clear"
+                slot="end"
+                color="medium"
+                (click)="toggleMissionVisionHelpDisplay(true)"
+              >
+                <ion-icon
+                  slot="icon-only"
+                  name="help-circle-outline"
+                ></ion-icon>
+              </ion-button>
+              <ion-label position="stacked">Mission statement:</ion-label>
+              <ion-textarea
+                placeholder="The organizational mission statement"
+                [ngModel]="missionStatement"
+                autoGrow
+                required
+                spellcheck
+              ></ion-textarea>
+            </ion-item>
+            <ion-item>
+              <ion-button
+                shape="round"
+                fill="clear"
+                slot="end"
+                color="medium"
+                (click)="toggleMissionVisionHelpDisplay(true)"
+              >
+                <ion-icon
+                  slot="icon-only"
+                  name="help-circle-outline"
+                ></ion-icon>
+              </ion-button>
+              <ion-label position="stacked">Vision statement:</ion-label>
+              <ion-textarea
+                placeholder="The organizational vision statement"
+                [ngModel]="visionStatement"
+                autoGrow
+                required
+                spellcheck
+              ></ion-textarea>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+        <ion-button fill="clear" (click)="reloadCompanyName()">
+          <ion-icon name="reload-outline" slot="start"></ion-icon>
+          Generate Random Fun
+        </ion-button>
+      </ion-card>
+    </div>
+    <ion-modal [isOpen]="isMissionVisionHelpVisible">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Mission vs. Vision</ion-title>
+            <ion-buttons slot="end">
+              <ion-button
+                (click)="toggleMissionVisionHelpDisplay(false)"
+                [strong]="true"
+                >Close</ion-button
+              >
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <p>
+            An organization's mission statement and a vision statement are both
+            important components of an organization's strategy and provide
+            direction for decision-making and goal-setting. However, they serve
+            different purposes and focus on different aspects of the
+            organization's future.
+          </p>
+          <p>
+            A mission statement defines the purpose and focus of an
+            organization, and outlines what the company does and why it exists.
+            It provides a framework for decision-making and guides the company's
+            actions and priorities.
+          </p>
+          <p>
+            A vision statement, on the other hand, is a more aspirational
+            statement that defines the organization's desired future state and
+            what it wants to achieve. It is a long-term view of what the company
+            wants to become and serves as a source of inspiration and motivation
+            for employees.
+          </p>
+          <p>
+            In summary, a mission statement answers the question "What do we
+            do?" while a vision statement answers the question "What do we want
+            to become?"
+          </p>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+  </ion-grid>
 </ion-content>

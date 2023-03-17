@@ -1,10 +1,5 @@
-<ion-toolbar>
-  <ion-title>
-    <ion-button fill="clear" routerLink="/">
-      <app-logo id="fidlit-logo-icon"></app-logo>
-      <ion-text>Fidlit</ion-text>
-    </ion-button>
-  </ion-title>
+<ion-toolbar fixed>
+  <ion-title>{{ title }}</ion-title>
   <ion-buttons [collapse]="true" slot="primary">
     <ion-button routerLink="/updates">Updates</ion-button>
     <ion-button

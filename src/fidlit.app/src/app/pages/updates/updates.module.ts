@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { LogoComponent } from '../../components/icons/logo/logo.component';
 import { LoremIpsumComponent } from '../../components/lorem-ipsum/lorem-ipsum.component';
 import { HeaderComponent } from '../../components/pages/header/header.component';
+import { IosHeaderComponent } from '../../components/pages/ios-header/ios-header.component';
 
 import { UpdatesPageRoutingModule } from './updates-routing.module';
 
@@ -18,6 +19,7 @@ import { UpdatesPage } from './updates.page';
     FormsModule,
     HeaderComponent,
     IonicModule,
+    IosHeaderComponent,
     LogoComponent,
     LoremIpsumComponent,
     UpdatesPageRoutingModule,
