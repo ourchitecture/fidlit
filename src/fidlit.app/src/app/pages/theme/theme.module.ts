@@ -9,9 +9,9 @@ import { LoremIpsumComponent } from '../../components/lorem-ipsum/lorem-ipsum.co
 import { HeaderComponent } from '../../components/pages/header/header.component';
 import { IosHeaderComponent } from '../../components/pages/ios-header/ios-header.component';
 
-import { UpdatesPageRoutingModule } from './updates-routing.module';
+import { ThemePageRoutingModule } from './theme-routing.module';
 
-import { UpdatesPage } from './updates.page';
+import { ThemePage } from './theme.page';
 
 @NgModule({
   imports: [
@@ -22,8 +22,8 @@ import { UpdatesPage } from './updates.page';
     IosHeaderComponent,
     LogoComponent,
     LoremIpsumComponent,
-    UpdatesPageRoutingModule,
+    ThemePageRoutingModule,
   ],
-  declarations: [UpdatesPage],
+  declarations: [ThemePage],
 })
-export class UpdatesPageModule {}
+export class ThemePageModule {}

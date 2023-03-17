@@ -4,10 +4,116 @@
 
 @include mat.core();
 
-$angular-primary: mat.define-palette(mat.$teal-palette, 500, 100, 900);
-$angular-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+// http://mcg.mbitson.com/#!?mcgpalette0=%23ef6024
+/* For use in src/lib/core/theming/_palette.scss */
+$fidlit-primary-palette: (
+  50: #e3edee,
+  100: #bad1d5,
+  200: #8cb3ba,
+  300: #5e959e,
+  400: #3c7e89,
+  500: #196774,
+  600: #165f6c,
+  700: #125461,
+  800: #0e4a57,
+  900: #083944,
+  A100: #7ae2ff,
+  A200: #47d7ff,
+  A400: #14cbff,
+  A700: #00c3fa,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
 
-$angular-warn: mat.define-palette(mat.$red-palette);
+// http://mcg.mbitson.com/#!?mcgpalette0=%23ef6024
+/* For use in src/lib/core/theming/_palette.scss */
+$fidlit-accent-palette: (
+  50: #fdf2e4,
+  100: #fbdfbc,
+  200: #f8ca8f,
+  300: #f5b462,
+  400: #f2a441,
+  500: #f0941f,
+  600: #ee8c1b,
+  700: #ec8117,
+  800: #e97712,
+  900: #e5650a,
+  A100: #ffffff,
+  A200: #ffe8db,
+  A400: #ffc8a8,
+  A700: #ffb88f,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+// http://mcg.mbitson.com/#!?mcgpalette0=%23ef6024
+/* For use in src/lib/core/theming/_palette.scss */
+$fidlit-error-palette: (
+  50: #fdece5,
+  100: #facfbd,
+  200: #f7b092,
+  300: #f49066,
+  400: #f17845,
+  500: #ef6024,
+  600: #ed5820,
+  700: #eb4e1b,
+  800: #e84416,
+  900: #e4330d,
+  A100: #ffffff,
+  A200: #ffe1dc,
+  A400: #ffb5a9,
+  A700: #ff9f90,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+// https://material.angular.io/guide/theming#create-your-own-palette
+$angular-primary: mat.define-palette($fidlit-primary-palette, 500, 100, 900);
+$angular-accent: mat.define-palette($fidlit-accent-palette, A200, A100, A400);
+
+$angular-warn: mat.define-palette($fidlit-error-palette);
 
 $angular-default-theme: mat.define-dark-theme(
   (

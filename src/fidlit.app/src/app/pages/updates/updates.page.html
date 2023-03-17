@@ -1,21 +1,21 @@
 <ion-header [translucent]="true">
-  <app-header></app-header>
+  <app-header title="Updates"></app-header>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header [translucent]="true" collapse="condense">
-    <ion-toolbar>
-      <ion-title color="primary" size="large">Fidlit</ion-title>
-    </ion-toolbar>
+    <app-ios-header title="Updates"></app-ios-header>
   </ion-header>
 
-  <div id="lipsum" class="ion-padding">
-    <ion-card>
-      <ion-item>
-        <ion-label>Last Updated:</ion-label>
-        <ion-text>TODO: this</ion-text>
-      </ion-item>
-    </ion-card>
-    <app-lorem-ipsum [paragraphCount]="10"></app-lorem-ipsum>
-  </div>
+  <ion-grid fixed>
+    <div id="lipsum" class="ion-padding">
+      <ion-card>
+        <ion-item>
+          <ion-label>Last Updated:</ion-label>
+          <ion-text>TODO: this</ion-text>
+        </ion-item>
+      </ion-card>
+      <app-lorem-ipsum [paragraphCount]="10"></app-lorem-ipsum>
+    </div>
+  </ion-grid>
 </ion-content>

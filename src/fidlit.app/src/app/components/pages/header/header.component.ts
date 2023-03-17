@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { IonicModule } from '@ionic/angular';
@@ -12,9 +12,11 @@ import { ThemeService } from '../../../services/theme.service';
   imports: [CommonModule, IonicModule, LogoComponent, RouterModule],
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  @Input() title: string = 'Fidlit';
+
   constructor(private themeService: ThemeService) {}
 
   async ngOnInit(): Promise<void> {

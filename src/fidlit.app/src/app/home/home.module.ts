@@ -17,6 +17,7 @@ import { AvatarIconComponent } from '../components/icons/avatar/avatar.component
 import { LogoComponent } from '../components/icons/logo/logo.component';
 import { OrganizationAgeComponent } from '../components/organization-age/organization-age.component';
 import { HeaderComponent } from '../components/pages/header/header.component';
+import { IosHeaderComponent } from '../components/pages/ios-header/ios-header.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { HeaderComponent } from '../components/pages/header/header.component';
     HomePageRoutingModule,
     HttpClientModule,
     IonicModule,
+    IosHeaderComponent,
     LogoComponent,
     MatButtonModule,
     MatIconModule,
