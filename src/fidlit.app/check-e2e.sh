@@ -31,8 +31,8 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
     "./check-e2e.sh" \
     "$(pwd)"
 else
-  checkYarnInstalled
+  checkPnpmInstalled
   checkNodeDependenciesDirectory
 
-  yarn e2e
+  pnpm e2e
 fi

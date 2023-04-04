@@ -4,7 +4,11 @@ ARG BASE_IMAGE_TAG=100-with-node
 
 ARG BASE_IMAGE_PATH=${BASE_IMAGE_REGISTRY}${BASE_IMAGE_NAME}:${BASE_IMAGE_TAG}
 
+ARG PNPM_VERSION=8.1.1
+
 FROM ${BASE_IMAGE_PATH} as base
+
+ARG PNPM_VERSION
 
 # Switch to root to update dependencies.
 USER root
@@ -25,6 +29,9 @@ RUN apk update \
       nodejs-npm \
       npm \
       yarn
+
+# Install pnpm.
+RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" PNPM_VERSION=${PNPM_VERSION} sh -
 
 USER chrome
 

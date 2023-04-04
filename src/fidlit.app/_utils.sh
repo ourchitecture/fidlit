@@ -20,6 +20,13 @@ checkYarnInstalled() {
   fi
 }
 
+checkPnpmInstalled() {
+  if ! command -v pnpm >/dev/null 2>&1; then
+    echo "The CLI for pnpm commands could not be found and must be installed." 1>&2
+    exit 1
+  fi
+}
+
 checkContainersInstalled() {
   container_tool="$1"
 

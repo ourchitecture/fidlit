@@ -26,14 +26,12 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
     "./init.sh" \
     "$(pwd)"
 else
-  checkYarnInstalled
+  checkPnpmInstalled
 
   # optional clean install for new dependencies or resetting the lockfile
   if [ x"${YARN_CLEAN_INSTALL}" == "x" ]; then
-    yarn install \
-        --frozen-lockfile \
-        --non-interactive
+    pnpm install --frozen-lockfile
   else
-    yarn install
+    pnpm install
   fi
 fi

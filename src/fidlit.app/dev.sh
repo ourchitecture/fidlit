@@ -46,7 +46,7 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
     "$tag_name" \
     "./dev.sh"
 else
-  checkYarnInstalled
+  checkPnpmInstalled
 
   # BUG: A container may not use `--watch` correctly on a volume due to
   #      insufficient file permissions. Therefore, `--poll` is used to
@@ -56,7 +56,7 @@ else
   echo '        server with --disable-host-check is a security risk."'
   echo '        This is used intentionally inside of a container.'
   echo ''
-  yarn start \
+  pnpm start \
     --port ${port_app} \
     --host 0.0.0.0 \
     --disable-host-check \

@@ -31,8 +31,8 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
     "./check-unit.sh" \
     "$(pwd)"
 else
-  checkYarnInstalled
+  checkPnpmInstalled
   checkNodeDependenciesDirectory
 
-  yarn test
+  pnpm test
 fi

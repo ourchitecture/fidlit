@@ -3,13 +3,17 @@ ARG BASE_IMAGE_NAME=node
 ARG BASE_IMAGE_OS=alpine
 
 # https://github.com/nodejs/release#release-schedule
-ARG NODE_VERSION=18.13.0
+ARG NODE_VERSION=18.15.0
 # https://alpinelinux.org/releases/
 ARG ALPINE_VERSION=3.17
+
+ARG PNPM_VERSION=8.1.1
 
 ARG BASE_IMAGE_PATH=${BASE_IMAGE_REGISTRY}${BASE_IMAGE_NAME}:${NODE_VERSION}-${BASE_IMAGE_OS}${ALPINE_VERSION}
 
 FROM ${BASE_IMAGE_PATH} as base
+
+ARG PNPM_VERSION
 
 # Upgrade all packages and dependencies.
 RUN apk update \
@@ -17,9 +21,12 @@ RUN apk update \
       --available \
       --no-cache
 
+# Install pnpm.
+RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" PNPM_VERSION=${PNPM_VERSION} sh -
+
 RUN mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
 
 LABEL org.opencontainers.image.source=https://github.com/ourchitecture/fidlit
-LABEL org.opencontainers.image.description="The latest node and yarn installation"
+LABEL org.opencontainers.image.description="The latest node, yarn and pnpm installation"

@@ -34,8 +34,8 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
 
 # if in a container...
 else
-  checkYarnInstalled
+  checkPnpmInstalled
   checkNodeDependenciesDirectory
 
-  yarn lint
+  pnpm lint
 fi
