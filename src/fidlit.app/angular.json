@@ -196,7 +196,8 @@
       "@ionic/angular-toolkit",
       "@schematics/angular"
     ],
-    "analytics": false
+    "analytics": false,
+    "packageManager": "pnpm"
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
