@@ -73,3 +73,5 @@ cypress/screenshots
 
 # Custom
 /dist
+
+.pnpm-store

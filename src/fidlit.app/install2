@@ -1,0 +1,68 @@
+#!/bin/sh
+
+. ./_utils.sh
+
+# NOTE: for debugging, add `-x`
+set -e
+
+tool="${FIDLIT_TOOL:-podman}"
+
+buildDevDependenciesContainer() {
+  dev_dependencies_tag_name="${TAG_NAME:-localhost/fidlit/app_dev_dependencies:latest}"
+  dev_dependencies_gh_tag_name="${TAG_NAME:-ghcr.io/ourchitecture/fidlit/app_dev_dependencies:latest}"
+
+  ${tool} build \
+    --tag="$dev_dependencies_tag_name" \
+    --file="./Containerfile" \
+    --target="dev_dependencies" \
+    .
+
+  ${tool} tag \
+    "$dev_dependencies_tag_name" \
+    "$dev_dependencies_gh_tag_name"
+}
+
+testApplication() {
+  app_lint_tag_name="${TAG_NAME:-localhost/fidlit/app_lint:latest}"
+
+  # Run linting checks.
+  ${tool} build \
+    --tag="$app_lint_tag_name" \
+    --file="./Containerfile" \
+    --target="lint" \
+    .
+
+  app_unit_test_tag_name="${TAG_NAME:-localhost/fidlit/app_unit_test:latest}"
+
+  # Run unit tests.
+  ${tool} build \
+    --tag="$app_unit_test_tag_name" \
+    --file="./Containerfile" \
+    --target="unit_test" \
+    .
+}
+
+buildAppContainer() {
+  app_tag_name="${TAG_NAME:-localhost/fidlit/app:latest}"
+  app_gh_tag_name="${TAG_NAME:-ghcr.io/ourchitecture/fidlit/app:latest}"
+
+  ${tool} build \
+    --tag="$app_tag_name" \
+    --file="./Containerfile" \
+    --target="build" \
+    .
+
+  ${tool} tag \
+    "$app_tag_name" \
+    "$app_gh_tag_name"
+}
+
+checkToolSupported $tool
+
+checkContainersInstalled $tool
+
+buildDevDependenciesContainer
+
+testApplication
+
+# buildAppContainer

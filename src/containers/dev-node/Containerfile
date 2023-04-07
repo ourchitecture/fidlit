@@ -1,10 +1,7 @@
-ARG NODE_MAJOR_VERSION="18"
-ARG PNPM_VERSION=8.1.1
-
 FROM localhost/fidlit/dev:latest as base
 
-ARG NODE_MAJOR_VERSION
-ARG PNPM_VERSION
+ARG NODE_MAJOR_VERSION="18"
+ARG PNPM_VERSION=8.1.1
 
 # install node
 RUN curl -sL https://deb.nodesource.com/setup_${NODE_MAJOR_VERSION}.x | bash - \

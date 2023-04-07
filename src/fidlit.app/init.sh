@@ -29,7 +29,7 @@ else
   checkPnpmInstalled
 
   # optional clean install for new dependencies or resetting the lockfile
-  if [ x"${YARN_CLEAN_INSTALL}" == "x" ]; then
+  if [ x"${PNPM_CLEAN_INSTALL}" == "x" ]; then
     pnpm install --frozen-lockfile
   else
     pnpm install

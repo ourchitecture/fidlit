@@ -1,0 +1,68 @@
+
+#####################################################################################
+# Development dependencies.
+#####################################################################################
+FROM localhost/fidlit/node:latest as dev_dependencies
+
+ENV CI=1
+
+RUN mkdir /usr/src/dependencies/
+
+COPY ./package.json ./pnpm-lock.yaml /usr/src/dependencies/
+
+WORKDIR /usr/src/dependencies/
+
+RUN pnpm install --frozen-lockfile --loglevel warn
+
+#####################################################################################
+# Production dependencies.
+#####################################################################################
+FROM localhost/fidlit/node:latest as prod_dependencies
+
+ENV CI=1
+
+RUN mkdir /usr/src/dependencies/
+
+COPY ./package.json ./pnpm-lock.yaml /usr/src/dependencies/
+
+WORKDIR /usr/src/dependencies/
+
+RUN pnpm install --prod --frozen-lockfile --loglevel warn
+
+#####################################################################################
+# Source code.
+#####################################################################################
+FROM localhost/fidlit/node:latest as node_src
+
+COPY . /usr/src/app/
+
+COPY --from=dev_dependencies /usr/src/dependencies/node_modules/ /usr/src/app/node_modules/
+
+#####################################################################################
+# Linting.
+#####################################################################################
+FROM node_src as lint
+
+RUN pnpm lint
+
+#####################################################################################
+# Browser-based unit tests.
+#####################################################################################
+FROM localhost/fidlit/node-chrome:latest as unit_test
+
+COPY --from=node_src /usr/src/app/ /usr/src/app/
+
+USER root
+
+RUN chown -R chrome:1000 /usr/src/app/*
+
+USER chrome
+
+# RUN pnpm test
+
+#####################################################################################
+# Build.
+#####################################################################################
+FROM node_src as build
+
+RUN pnpm build

@@ -4,14 +4,12 @@ ARG BASE_IMAGE_NAME=included
 # The Cypress version must match the version used in applications
 # (e.g. "package.json" under "dependencies.cypress").
 # If the "cypress" version specified in "package.json" is "latest",
-# it will still use a specific version in "yarn.lock", so it is best
-# practice to always specify a specific version.
-ARG CYPRESS_VERSION=12.7.0
+# it will still use a specific version in "yarn.lock" or "pnpm-lock.yaml",
+# so it is best practice to always specify a specific version.
+ARG CYPRESS_VERSION=12.9.0
 ARG NODE_VERSION=18.14.1
-ARG CHROME_VERSION=110.0.5481.96-1-ff-109.0
-ARG EDGE_VERSION=110.0.1587.41-1
-
-# cypress-12.9.0-node-18.14.1-chrome-111.0.5563.146-1-ff-111.0.1-edge-111.0.1661.54-1
+ARG CHROME_VERSION=111.0.5563.146-1-ff-111.0.1
+ARG EDGE_VERSION=111.0.1661.54-1
 
 ARG BASE_IMAGE_PATH=${BASE_IMAGE_REGISTRY}${BASE_IMAGE_NAME}:cypress-${CYPRESS_VERSION}-node-${NODE_VERSION}-chrome-${CHROME_VERSION}-edge-${EDGE_VERSION}
 

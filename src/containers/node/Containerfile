@@ -7,13 +7,11 @@ ARG NODE_VERSION=18.15.0
 # https://alpinelinux.org/releases/
 ARG ALPINE_VERSION=3.17
 
-ARG PNPM_VERSION=8.1.1
-
 ARG BASE_IMAGE_PATH=${BASE_IMAGE_REGISTRY}${BASE_IMAGE_NAME}:${NODE_VERSION}-${BASE_IMAGE_OS}${ALPINE_VERSION}
 
 FROM ${BASE_IMAGE_PATH} as base
 
-ARG PNPM_VERSION
+ARG PNPM_VERSION=8.1.1
 
 # Upgrade all packages and dependencies.
 RUN apk update \
@@ -22,7 +20,7 @@ RUN apk update \
       --no-cache
 
 # Install pnpm.
-RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" PNPM_VERSION=${PNPM_VERSION} sh -
+RUN npm install --location=global pnpm@${PNPM_VERSION}
 
 RUN mkdir -p /usr/src/app
 
