@@ -53,7 +53,7 @@ update-ng:
 
 .PHONY: clean
 clean:
-	@rm -rf ./node_modules/ ./dist/
+	@rm -rf ./.pnpm-store ./node_modules/ ./dist/
 
 .PHONY: clean-reset
 clean-reset: clean

@@ -75,3 +75,4 @@ cypress/screenshots
 /dist
 
 .pnpm-store
+.npmrc
