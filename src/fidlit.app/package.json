@@ -37,13 +37,12 @@
     "@capacitor/haptics": "^4.1.0",
     "@capacitor/keyboard": "^4.1.1",
     "@capacitor/status-bar": "^4.1.1",
-    "@ionic/angular": "^7.0.0",
-    "@ionic/storage-angular": "^3.0.6",
+    "@ionic/angular": "^7.0.1",
+    "@ionic/storage": "^3.0.6",
     "human-names": "^1.0.12",
     "ionicons": "^7.1.0",
     "project-name-generator": "^2.1.9",
     "rxjs": "~7.8.0",
-    "tslib": "^2.5.0",
     "zone.js": "~0.13.0"
   },
   "devDependenciesComments": {
@@ -61,7 +60,7 @@
     "@angular/language-service": "^15.2.6",
     "@capacitor/cli": "^4.7.3",
     "@cypress/schematic": "^2.5.0",
-    "@ionic/angular-toolkit": "^8.0.0",
+    "@ionic/angular-toolkit": "^9.0.0",
     "@types/jasmine": "~4.3.1",
     "@types/node": "^18.15.11",
     "@types/project-name-generator": "^2.1.1",
@@ -81,6 +80,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "ts-node": "~10.9.1",
+    "tslib": "^2.5.0",
     "typescript": "~4.9.5"
   }
 }

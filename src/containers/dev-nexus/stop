@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+container_name="nexus"
+
+if [ "$(podman ps --all --quiet --filter name=${nexus_container_name})" ]; then
+
+  if [ "$(podman ps --all --quiet --filter name=${nexus_container_name} --filter status=stopped)" ]; then
+    echo "Nexus container is already stopped"
+  else
+    podman stop --time=120 "${container_name}"
+    echo "Nexus container has been stopped"
+  fi
+else
+  echo "Could not find Nexus container: ${container_name}"
+fi

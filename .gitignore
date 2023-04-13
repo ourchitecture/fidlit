@@ -229,5 +229,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+.env
+
 # Custom
 CONTAINER_PASSWORD

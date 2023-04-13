@@ -7,7 +7,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
-import { IonicStorageModule } from '@ionic/storage-angular';
+// import { IonicStorageModule } from '@ionic/storage-angular';
+import { IonicStorageModule } from './services/storage.service';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
