@@ -11,8 +11,8 @@ env:
   NG_CLI_ANALYTICS: ci
   MAIN_BRANCH_REF: "refs/heads/main"
   PUSH_EVENT: "push"
-  YARN_CACHE_NAME: "yarn"
-  YARN_CACHE_PATH: "./**/yarn.lock"
+  NODE_CACHE_NAME: "pnpm"
+  NODE_CACHE_PATH: "./**/pnpm-lock.yaml"
   OUR_AUTODOC_COMMIT: "docs: auto-generated documentation"
   OUR_AUTODOC_DESC: "Automatically generated documentation that requires a PR, because the main branch is protected."
   OUR_AUTODOC_LABELS: "documentation"
@@ -54,6 +54,7 @@ jobs:
     strategy:
       matrix:
         node-version: [18.x]
+        pnpm-version: [8]
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it.
@@ -64,8 +65,29 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           # See: https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
-          cache: ${{ env.YARN_CACHE_NAME }}
-          cache-dependency-path: ${{ env.YARN_CACHE_PATH }}
+          cache: ${{ env.NODE_CACHE_NAME }}
+          cache-dependency-path: ${{ env.NODE_CACHE_PATH }}
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: ${{ matrix.pnpm-version }}
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: login
         env:
