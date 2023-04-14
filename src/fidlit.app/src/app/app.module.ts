@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule, isDevMode } from '@angular/core';
+import { isDevMode, NgModule, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouteReuseStrategy } from '@angular/router';
@@ -7,8 +7,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
-// import { IonicStorageModule } from '@ionic/storage-angular';
 import { IonicStorageModule } from './services/storage.service';
+import { AppUpdateService } from './services/app-update.service';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
