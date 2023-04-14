@@ -5,13 +5,11 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { IonicModule } from '@ionic/angular';
 
-import { Storage } from '@ionic/storage-angular';
-
 import { HomePage } from './home.page';
 
 import { LogoComponent } from '../components/icons/logo/logo.component';
 
-import { StorageService } from '../services/storage.service';
+import { Storage, StorageService } from '../services/storage.service';
 
 describe('HomePage', () => {
   let component: HomePage;
