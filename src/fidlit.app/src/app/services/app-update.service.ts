@@ -13,9 +13,15 @@ export class AppUpdateService {
     private readonly serviceWorkerUpdate: SwUpdate,
     private toastController: ToastController,
     private windowRef: WindowRef
-  ) {
+  ) {}
+
+  public setup() {
+    console.debug('AppUpdateService.setup(): listening for updates...');
+
     this.serviceWorkerUpdate.versionUpdates.subscribe((versionUpdatesEvent) => {
       const evt: any = versionUpdatesEvent;
+
+      console.debug('SwUpdate "versionUpdates" Event...');
 
       switch (versionUpdatesEvent.type) {
         case 'VERSION_DETECTED':
