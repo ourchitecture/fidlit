@@ -17,7 +17,7 @@ env:
   OUR_AUTODOC_LABELS: "documentation"
   # this variable uses a system account since there are permission issues when assigning teams
   # see: https://github.com/peter-evans/create-pull-request/issues/155#issuecomment-611904487
-  OUR_AUTODOC_REVIEWERS: "ourchitectureio"
+  OUR_AUTODOC_REVIEWERS: "fidlit-maintainers"
   OUR_AUTODOC_ASSIGNEES: "ourchitectureio"
   OUR_SKIP_CI: "[skip ci]"
   OUR_CREATE_PR: "ourchitecture/create-pull-request/patch"
