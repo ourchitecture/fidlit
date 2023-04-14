@@ -105,7 +105,7 @@ jobs:
         # If push or workflow_dispatch to main, avoid infinite loop.
         if: |
           (github.event_name == env.PUSH_EVENT ||
-          github.event_name == WORKFLOW_DISPATCH_EVENT) &&
+          github.event_name == env.WORKFLOW_DISPATCH_EVENT) &&
           github.ref == env.MAIN_BRANCH_REF &&
           !contains(github.event.head_commit.message, env.OUR_CREATE_PR)
         with:
