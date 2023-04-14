@@ -1,6 +1,7 @@
 FROM localhost/fidlit/dev:latest as base
 
 ARG NODE_MAJOR_VERSION="18"
+ARG PNPM_VERSION=8.1.1
 
 # install node
 RUN curl -sL https://deb.nodesource.com/setup_${NODE_MAJOR_VERSION}.x | bash - \
@@ -12,5 +13,8 @@ RUN curl -sL https://deb.nodesource.com/setup_${NODE_MAJOR_VERSION}.x | bash - \
     && rm -rf /var/lib/apt/lists/* \
     # ensure latest npm
     && npm install --location=global npm@latest \
-    # install yarn
+    # install yarn and pnpm
     && npm install --location=global yarn
+
+# Install pnpm.
+RUN curl -fsSL https://get.pnpm.io/install.sh | PNPM_VERSION=${PNPM_VERSION} sh -

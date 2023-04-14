@@ -1,0 +1,62 @@
+#!/bin/sh
+
+set -e
+
+echo 'Installing Nexus...'
+
+tool="${CONTAINER_TOOL:-podman}"
+show_logs="${SHOW_LOGS:-0}"
+
+nexus_data_volume_name="nexus-data"
+
+function displayContainerIsRunningMessages() {
+  echo 'Nexus container was started at:'
+  echo 'http://localhost:8081'
+  echo ''
+  echo 'The localhost:8091 can be used for containers.'
+  echo 'e.g. [podman|docker] login localhost:8091'
+  echo 'Docker Hub can be used directly on localhost:8092.'
+  echo 'e.g. [podman|docker] login localhost:8092'
+
+  if [ "$show_logs" = "1" ]; then
+    sleep 3s
+
+    echo ''
+    echo ''
+    $tool logs --follow "${nexus_container_name}"
+  fi
+}
+
+set +e
+$tool volume exists "${nexus_data_volume_name}"
+nexus_data_volume_exists=$?
+set -e
+
+if [ "$nexus_data_volume_exists" != "0" ]; then
+  echo "Creating Nexus data volume..."
+  $tool volume create "${nexus_data_volume_name}"
+fi
+
+nexus_image_tag="sonatype/nexus3"
+nexus_container_name="nexus"
+
+if [ "$($tool ps --all --quiet --filter name=${nexus_container_name})" ]; then
+
+  # TODO: handle `status=exited`
+  if [ "$($tool ps --all --quiet --filter name=${nexus_container_name} --filter status=stopped)" ]; then
+    $tool start "${nexus_container_name}"
+  fi
+else
+  $tool pull "${nexus_image_tag}"
+
+  echo 'Starting Nexus server...'
+  $tool run \
+    --detach \
+    --publish 8081:8081 \
+    --publish 8091:8091 \
+    --publish 8092:8092 \
+    --name "${nexus_container_name}" \
+    --volume nexus-data:/nexus-data "${nexus_image_tag}"
+fi
+
+displayContainerIsRunningMessages $show_logs

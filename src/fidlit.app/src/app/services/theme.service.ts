@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Storage } from '@ionic/storage-angular';
+import { Storage } from '@ionic/storage';
 
 const STORAGE_KEYS_APP_DARK_MODE = 'app_dark-mode';
 

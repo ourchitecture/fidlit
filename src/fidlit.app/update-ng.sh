@@ -26,9 +26,9 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
     "./update-ng.sh" \
     "$(pwd)"
 else
-  checkYarnInstalled
+  checkPnpmInstalled
 
-	yarn ng update \
+	pnpm ng update \
     @angular/animations@^15 \
     @angular/cdk@^15 \
     @angular/common@^15 \

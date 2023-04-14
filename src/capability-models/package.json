@@ -2,8 +2,9 @@
   "name": "capability-models",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "AGPL-3.0-only",
+  "license": "MIT",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "start": "node ./index.js"
   },
   "devDependencies": {

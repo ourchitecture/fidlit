@@ -31,10 +31,10 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
     "./install.sh" \
     "$(pwd)"
 else
-  checkYarnInstalled
+  checkPnpmInstalled
   checkNodeDependenciesDirectory
 
-  yarn build
+  pnpm build
 
   cp ./dist/index.html ./dist/404.html
 fi

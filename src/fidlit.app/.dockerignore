@@ -2,8 +2,11 @@
 # does not provide support for this or a method to specify a custom name for
 # this file.
 
+.pnpm-store/
 node_modules/
+
 .editorconfig
 .gitignore
+Containerfile
 makefile
 *.sh

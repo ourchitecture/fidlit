@@ -8,6 +8,10 @@ port_host:=4200
 .PHONY: all
 all: init check install
 
+.PHONY: install2
+install2:
+	@./install2
+
 .PHONY: init
 init:
 	@./init.sh
@@ -49,12 +53,12 @@ update-ng:
 
 .PHONY: clean
 clean:
-	@rm -rf ./node_modules/ ./dist/
+	@rm -rf ./.angular/ ./.pnpm-store ./node_modules/ ./dist/
 
 .PHONY: clean-reset
 clean-reset: clean
-	@rm -rf ./.angular/ ./yarn.lock
-	@YARN_CLEAN_INSTALL=1 "$(MAKE)" init
+	@rm -rf ./pnpm-lock.yaml
+	@PNPM_CLEAN_INSTALL=1 "$(MAKE)" init
 
 .PHONY: root-ws
 root-ws:

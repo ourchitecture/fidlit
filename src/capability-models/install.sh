@@ -35,14 +35,12 @@ if [ x"${IN_CONTAINER}" = "x" ]; then
     "$tag_name" \
     ./install.sh
 else
-  if ! command -v yarn >/dev/null 2>&1; then
-    echo "The CLI for yarn commands could not be found and must be installed." 1>&2
+  if ! command -v pnpm >/dev/null 2>&1; then
+    echo "The CLI for pnpm commands could not be found and must be installed." 1>&2
     exit 1
   fi
 
-  yarn install \
-      --frozen-lockfile \
-      --non-interactive
+  pnpm install --frozen-lockfile
 
-  yarn start
+  pnpm start
 fi
