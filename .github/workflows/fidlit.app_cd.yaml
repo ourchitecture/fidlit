@@ -11,6 +11,7 @@ env:
   NG_CLI_ANALYTICS: ci
   MAIN_BRANCH_REF: "refs/heads/main"
   PUSH_EVENT: "push"
+  WORKFLOW_DISPATCH_EVENT: "workflow_dispatch"
   OUR_AUTODOC_COMMIT: "docs: auto-generated documentation"
   OUR_AUTODOC_DESC: "Automatically generated documentation that requires a PR, because the main branch is protected."
   OUR_AUTODOC_LABELS: "documentation"
@@ -101,9 +102,10 @@ jobs:
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
-        # If push to main, avoid infinite loop.
+        # If push or workflow_dispatch to main, avoid infinite loop.
         if: |
-          github.event_name == env.PUSH_EVENT &&
+          (github.event_name == env.PUSH_EVENT ||
+          github.event_name == WORKFLOW_DISPATCH_EVENT) &&
           github.ref == env.MAIN_BRANCH_REF &&
           !contains(github.event.head_commit.message, env.OUR_CREATE_PR)
         with:
