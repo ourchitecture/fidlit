@@ -19,8 +19,6 @@ on:
 env:
   CI: 1
   NG_CLI_ANALYTICS: ci
-  YARN_CACHE_NAME: "yarn"
-  YARN_CACHE_PATH: "./**/yarn.lock"
 
 jobs:
   integrate:
@@ -29,6 +27,11 @@ jobs:
     env:
       PROJECT_PATH: ./src/fidlit.app/
 
+    strategy:
+      matrix:
+        node-version: [18.x]
+        pnpm-version: [8]
+
     steps:
       - uses: actions/checkout@v3
 
@@ -36,9 +39,27 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          # See: https://github.com/actions/setup-node/blob/main/docs/advanced-usage.md#caching-packages-data
-          cache: ${{ env.YARN_CACHE_NAME }}
-          cache-dependency-path: ${{ env.YARN_CACHE_PATH }}
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: ${{ matrix.pnpm-version }}
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: login
         env:
