@@ -15,5 +15,10 @@ ARG BASE_IMAGE_PATH=${BASE_IMAGE_REGISTRY}${BASE_IMAGE_NAME}:cypress-${CYPRESS_V
 
 FROM ${BASE_IMAGE_PATH} as base
 
+ARG PNPM_VERSION=8.2.0
+
+# Install pnpm.
+RUN npm install --location=global pnpm@${PNPM_VERSION}
+
 LABEL org.opencontainers.image.source=https://github.com/ourchitecture/fidlit
 LABEL org.opencontainers.image.description="The latest node + Cypress testing + chrome installation"
