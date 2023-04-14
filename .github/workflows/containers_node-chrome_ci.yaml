@@ -15,6 +15,9 @@ on:
       # Run this build when the source code changes.
       - "src/containers/node-chrome/**"
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
 env:
   CI: 1
 
